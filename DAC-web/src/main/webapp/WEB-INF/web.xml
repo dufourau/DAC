@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>webapp</display-name>
+    
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.caco.servlet.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>hello</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mathsStateless</servlet-name>
+        <url-pattern>/mathsStateless</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mathsSaveStateless</servlet-name>
+        <url-pattern>/mathsSaveStateless</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mathsStateful</servlet-name>
+        <url-pattern>/mathsStateful</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logOut</servlet-name>
+        <url-pattern>/logOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <!-- Uncomment the following to activate authentication
+        Default user/password is jonas/jonas or tomcat/tomcat-->
+    <!--    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected area</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>jonas-admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>webapp Real (using JOnAS Realm)</realm-name>
+        <form-login-config>
+            <form-login-page>/login.html</form-login-page>
+            <form-error-page>/logerror.html</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <role-name>jonas-admin</role-name>
+    </security-role>-->
+</web-app>
