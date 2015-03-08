@@ -14,34 +14,20 @@ import javax.persistence.Table;
 
 /**
  *
- * @author dufourau
+ * @author andreiy
  */
-@Entity(name="Personne")
-@Table(name="Personne")
-public class Personne implements Serializable {
+@Entity(name="Evennement")
+@Table(name="Evennement")
+public class Evennement implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nom;
-    private String password;
-    /**
-     * Get the value of nom
-     *
-     * @return the value of nom
-     */
-    public String getNom() {
-        return nom;
-    }
-
-    /**
-     * Set the value of nom
-     *
-     * @param nom new value of nom
-     */
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    
+    private String Nom;
+    private String Date;
+    private String Ville;
+    private double Prix;
 
     public Long getId() {
         return id;
@@ -61,10 +47,10 @@ public class Personne implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Personne)) {
+        if (!(object instanceof Evennement)) {
             return false;
         }
-        Personne other = (Personne) object;
+        Evennement other = (Evennement) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -73,7 +59,44 @@ public class Personne implements Serializable {
 
     @Override
     public String toString() {
-        return "com.caco.Entity.Personne[ id=" + id + " ]";
+        return "com.caco.Entity.Evennement[ id=" + id + " ]";
     }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getNom() {
+        return Nom;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public String getVille() {
+        return Ville;
+    }
+
+    public double getPrix() {
+        return Prix;
+    }
+
+    public void setNom(String Nom) {
+        this.Nom = Nom;
+    }
+
+    public void setDate(String Date) {
+        this.Date = Date;
+    }
+
+    public void setVille(String Ville) {
+        this.Ville = Ville;
+    }
+
+    public void setPrix(double Prix) {
+        this.Prix = Prix;
+    }
+    
     
 }

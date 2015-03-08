@@ -21,6 +21,13 @@
     
     <dependencies>
         <dependency>
+            <groupId>com.caco</groupId>
+            <artifactId>DAC-ejb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+            
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>

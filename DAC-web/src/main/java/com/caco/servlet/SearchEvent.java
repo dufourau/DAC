@@ -5,11 +5,9 @@
  */
 package com.caco.servlet;
 
-import com.caco.Entity.Personne;
-import com.caco.Entity.stateless.PersonneFacadeLocal;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Enumeration;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author dufourau
+ * @author andreiy
  */
-public class Login extends HttpServlet {
-    @EJB
-    private PersonneFacadeLocal personneFacade;
-  
+public class SearchEvent extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,11 +40,8 @@ public class Login extends HttpServlet {
             String t = e.nextElement();
             System.err.print(t + " : " + request.getParameter(t));
         }
-
-        personneFacade.createFromNom(nom);
         
-        request.setAttribute("nomcomplet", nom + " enfin !!!!");
-       getServletContext().getRequestDispatcher("/vue.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/vue.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
