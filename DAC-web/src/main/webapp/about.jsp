@@ -1,6 +1,6 @@
 <%-- 
-    Document   : detailEvent
-    Created on : 8 mars 2015, 14:44:36
+    Document   : about
+    Created on : 8 mars 2015, 16:26:21
     Author     : andreiy
 --%>
 
@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/index.css" rel="stylesheet">
-        <title>Details de l'évennement</title>
+        <title>About Us</title>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -27,7 +27,7 @@
                         <a href="#">Evenement</a>
                     </li>
                     <li>
-                        <a href="About">A Propos</a>
+                        <a href="About">A propos</a>
                     </li>
                   
               
@@ -37,21 +37,17 @@
         </div>
         <!-- /.container -->
     </nav>
-        
-     <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-        <h1>Hello World!</h1>
-        Je suis sur la page de détails dévent
-        <table>
-            <tr>Test</tr>
-            <tr>${param.nomEvent}</tr>
-            <tr>${param.dateEvent}</tr>
-            <tr>${param.lieuEvent}</tr>
-            <tr>${param.prixEvent}</tr>
-        </table>
+        <div class="container">
+            <div class="row">
+                <h1>A bunch of geek :</h1>
+                ANDREI Yannick </br>
+                BATON Francois </br>
+                CARIVEN Mathieu </br>
+                DUFOUR Aurélien </br>
+                LEMAIRE Thomas</br>
+                LINARES Clément </br>
+                POUZAUD Romain </br>
+            </div>
         </div>
-    </div>
     </body>
 </html>

@@ -18,13 +18,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                         <a href="#">E-Caco</a>
+                         <a href="Home">E-Caco</a>
                     </li>
                     <li>
                         <a href="#">Evenement</a>
                     </li>
                     <li>
-                        <a href="#">A Propos</a>
+                        <a href="About">A propos</a>
                     </li>
                   
               
@@ -131,7 +131,7 @@
                       </tr>
                       <tr>
                       <form action="DetailsEvent" method="get">
-                          <td><input type="hidden" name="nomEvent" value="Festival">Festival</td>
+                        <td><input type="hidden" name="nomEvent" value="Festival">Festival</td>
                         <td><input type="hidden" name="dateEvent" value="01/01/01">01/01/01</td>
                         <td><input type="hidden" name="lieuEvent" value="Paris">Paris</td>
                         <td><input type="hidden" name="prixEvent" value="999.9">999.9</td>

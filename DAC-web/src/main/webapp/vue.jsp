@@ -21,13 +21,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                         <a href="#">E-Caco</a>
+                         <a href="Home">E-Caco</a>
                     </li>
                     <li>
                         <a href="#">Evenement</a>
                     </li>
                     <li>
-                        <a href="#">A Propos</a>
+                        <a href="About">A Propos</a>
                     </li>
                   
               
