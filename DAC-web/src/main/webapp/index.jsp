@@ -57,6 +57,8 @@
                           <button type="submit" class="btn btn-default">Connexion</button>
                         </div>
                      </div>
+                    </form>
+                    <form action="Inscription" class="form-horizontal">
                      <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-2">
                           <button type="submit" class="btn btn-default">Inscription</button>
