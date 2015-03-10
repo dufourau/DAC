@@ -148,32 +148,6 @@
             </div>
            
         </div>  
-        
-        <div class="row">
-            <div class="well">
-            <sql:query var="result" dataSource="jdbc/__dac">
-                SELECT * FROM personne;
-            </sql:query>
-                
-                <table border="1">
-                    <!-- column headers -->
-                    <tr>
-                        <c:forEach var="columnName" items="${result.columnNames}">
-                            <th><c:out value="${columnName}"/></th>
-                        </c:forEach>
-                    </tr>
-    
-                    <!-- column data -->
-                    <c:forEach var="row" items="${result.rowsByIndex}">
-                    <tr>
-                        <c:forEach var="column" items="${row}">
-                            <td><c:out value="${column}"/></td>
-                        </c:forEach>
-                    </tr>
-                    </c:forEach>
-                </table>
-            </div>
-        </div>
        
     </div>
     </body>

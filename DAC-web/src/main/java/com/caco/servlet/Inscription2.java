@@ -5,10 +5,13 @@
  */
 package com.caco.servlet;
 
+import com.caco.Entity.Personne;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,42 +44,7 @@ public class Inscription2 extends HttpServlet {
         String email = request.getParameter("email");
         
         if(pwd.equals(pwd2)){
-            
-            /*try {
-         
-                BSManager srcManage = new BSManager() ;
-                
-                Connection conn = srcManage.
-         
-                //Création d'un objet Statement
-                Statement state = conn.createStatement();
-                //L'objet ResultSet contient le résultat de la requête SQL
-                ResultSet result = state.executeQuery("SELECT * FROM classe");
-                //On récupère les MetaData
-                ResultSetMetaData resultMeta = result.getMetaData();
-         
-      System.err.print("\n**********************************");
-      //On affiche le nom des colonnes
-      for(int i = 1; i <= resultMeta.getColumnCount(); i++)
-        System.err.print("\t" + resultMeta.getColumnName(i).toUpperCase() + "\t *");
-         
-      System.err.print("\n**********************************");
-         
-      while(result.next()){         
-        for(int i = 1; i <= resultMeta.getColumnCount(); i++)
-          System.err.print("\t" + result.getObject(i).toString() + "\t |");
-            
-        System.err.print("\n---------------------------------");
-      }
-      result.close();
-      state.close();
-         
-    } catch (Exception e) {
-      e.printStackTrace();
-    } */
-            
-            
-            
+       
             /*String email = request.getParameter("email");
             String prenom = request.getParameter("prenom");
             //int age = Integer.parseInt(request.getParameter("age"));
@@ -85,7 +53,17 @@ public class Inscription2 extends HttpServlet {
             String adresse = request.getParameter("adresse");*/
 
             personneFacade.createFromParam(email, "unknown", "unknown", pwd, 100, "unknown");
+            
+            List<Personne>  listPers = personneFacade.findAll();
         
+            System.err.print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            
+            for (Iterator<Personne> iterator = listPers.iterator(); iterator.hasNext();) {
+                Personne next = iterator.next();
+                System.err.print("ID de la personne : ");
+                System.err.print(next.getId());
+            }
+            
             request.setAttribute("logger", true);
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }else{
