@@ -23,6 +23,13 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <resource-ref>
+        <description>Connects to database for Ecaco application</description>
+        <res-ref-name>jdbc/__dac</res-ref-name>
+        <res-type>javax.sql.ConnectionPoolDataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
     <!-- Uncomment the following to activate authentication
         Default user/password is jonas/jonas or tomcat/tomcat-->
     <!--    <security-constraint>

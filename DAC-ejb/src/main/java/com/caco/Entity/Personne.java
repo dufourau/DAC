@@ -23,8 +23,25 @@ public class Personne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String email;
+    private String prenom;
     private String nom;
     private String password;
+    private int age;
+    private String adresse;
+
+    public Personne(String email, String prenom, String nom, String password, int age, String adresse) {
+        this.email = email;
+        //this.prenom = prenom;
+        //this.nom = nom;
+        this.password = password;
+        //this.age = age;
+        //this.adresse = adresse;
+    }
+
+    public Personne() {
+    }
+    
     /**
      * Get the value of nom
      *
@@ -32,6 +49,50 @@ public class Personne implements Serializable {
      */
     public String getNom() {
         return nom;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getAdresse() {
+        return adresse;
     }
 
     /**

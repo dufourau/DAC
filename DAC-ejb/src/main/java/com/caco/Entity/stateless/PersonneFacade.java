@@ -35,4 +35,10 @@ public class PersonneFacade extends AbstractFacade<Personne> implements Personne
         create(p);
     }
     
+    @Override
+    public void createFromParam(String email, String prenom, String nom, String password, int age, String adresse){
+        Personne p = new Personne(email,prenom,nom,password, age,adresse);
+        create(p);
+    }
+    
 }

@@ -40,47 +40,47 @@
         <div class="container">
             <div class="row">
                 <div class="well">
-                   <form class="form-horizontal">  
+                   <form class="form-horizontal" action="Inscription2">  
                     <div class="form-group">
                         <label for="inputEmail" class="col-sm-2 control-label"><span style="color:red">* </span>Email</label>
                         <div class="col-sm-6">
-                          <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                          <input name="email" class="form-control" id="inputEmail3" placeholder="Email">
                         </div>
                      </div>
                      <div class="form-group">
                         <label for="inputPassword" class="col-sm-2 control-label"><span style="color:red">* </span>Mot de passe</label>
                         <div class="col-sm-6">
-                          <input type="password" class="form-control" id="inputEmail3" placeholder="Mot de passe">
+                          <input name="password" class="form-control" id="inputEmail3" placeholder="Mot de passe">
                         </div>
                      </div>
                      <div class="form-group">
-                        <label for="inputPassword" class="col-sm-2 control-label"><span style="color:red">* </span>Confirmer le mot de passe</label>
+                        <label for="inputPassword2" class="col-sm-2 control-label"><span style="color:red">* </span>Confirmer le mot de passe</label>
                         <div class="col-sm-6">
-                          <input type="password" class="form-control" id="inputEmail3" placeholder="Mot de passe">
+                          <input name="password2" class="form-control" id="inputEmail3" placeholder="Mot de passe">
                         </div>
                      </div>
                      <div class="form-group">
-                        <label for="inputPassword" class="col-sm-2 control-label">Prénom</label>
+                        <label for="inputPrenom" class="col-sm-2 control-label">Prénom</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="inputEmail3" placeholder="Prénom">
+                          <input type="text" name="prenom" class="form-control" id="inputEmail3" placeholder="Prénom">
                         </div>
                      </div>
                      <div class="form-group">
-                        <label for="inputPassword" class="col-sm-2 control-label">Nom</label>
+                        <label for="inputNom" class="col-sm-2 control-label">Nom</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
+                          <input type="text" name="nom" class="form-control" id="inputEmail3" placeholder="Nom">
                         </div>
                      </div>
                        <div class="form-group">
-                        <label for="inputPassword" class="col-sm-2 control-label">Age</label>
+                        <label for="inputAge" class="col-sm-2 control-label">Age</label>
                         <div class="col-sm-6">
-                          <input type="number" class="form-control" id="inputEmail3" placeholder="Age">
+                          <input type="number" name="age" class="form-control" id="inputEmail3" placeholder="Age">
                         </div>
                      </div>
                      <div class="form-group">
-                        <label for="inputPassword" class="col-sm-2 control-label">Adresse</label>
+                        <label for="inputAdresse" class="col-sm-2 control-label">Adresse</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="inputEmail3" placeholder="Adresse">
+                          <input type="text" name="adresse" class="form-control" id="inputEmail3" placeholder="Adresse">
                         </div>
                      </div>
                        

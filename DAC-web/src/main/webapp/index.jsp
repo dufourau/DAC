@@ -1,3 +1,4 @@
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,6 +39,7 @@
     <div class="col-md-4">
         
                 <!-- Login box -->
+                ${param.logger}
                 <div class="well">
                    <form class="form-horizontal">  
                     <div class="form-group">
@@ -144,9 +146,35 @@
                 </div>
               
             </div>
-            
+           
+        </div>  
+        
+        <div class="row">
+            <div class="well">
+            <sql:query var="result" dataSource="jdbc/__dac">
+                SELECT * FROM personne;
+            </sql:query>
                 
-        </div>      
+                <table border="1">
+                    <!-- column headers -->
+                    <tr>
+                        <c:forEach var="columnName" items="${result.columnNames}">
+                            <th><c:out value="${columnName}"/></th>
+                        </c:forEach>
+                    </tr>
+    
+                    <!-- column data -->
+                    <c:forEach var="row" items="${result.rowsByIndex}">
+                    <tr>
+                        <c:forEach var="column" items="${row}">
+                            <td><c:out value="${column}"/></td>
+                        </c:forEach>
+                    </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+       
     </div>
     </body>
 </html>

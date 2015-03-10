@@ -17,6 +17,8 @@ import javax.ejb.Local;
 public interface PersonneFacadeLocal {
 
     void createFromNom(String nom);
+    
+    void createFromParam(String email, String prenom, String nom, String password, int age, String adresse);
   
     void create(Personne personne);
 
