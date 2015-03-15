@@ -5,7 +5,7 @@
  */
 package com.caco.Entity.stateless;
 
-import com.caco.Entity.Evennement;
+import com.caco.Entity.Evenement;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -16,17 +16,17 @@ import javax.ejb.Local;
 @Local
 public interface EvennementFacadeLocal {
 
-    void create(Evennement evennement);
+    void create(Evenement evennement);
 
-    void edit(Evennement evennement);
+    void edit(Evenement evennement);
 
-    void remove(Evennement evennement);
+    void remove(Evenement evennement);
 
-    Evennement find(Object id);
+    Evenement find(Object id);
 
-    List<Evennement> findAll();
+    List<Evenement> findAll();
 
-    List<Evennement> findRange(int[] range);
+    List<Evenement> findRange(int[] range);
 
     int count();
     

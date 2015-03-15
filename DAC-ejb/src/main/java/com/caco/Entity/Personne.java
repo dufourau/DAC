@@ -134,7 +134,7 @@ public class Personne implements Serializable {
 
     @Override
     public String toString() {
-        return "com.caco.Entity.Personne[ id=" + id + " ]";
+        return "com.caco.Entity.Personne[ id=" + id + "\nemail=" + email + " ]";
     }
     
 }

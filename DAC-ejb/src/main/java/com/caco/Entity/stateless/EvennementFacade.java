@@ -5,7 +5,7 @@
  */
 package com.caco.Entity.stateless;
 
-import com.caco.Entity.Evennement;
+import com.caco.Entity.Evenement;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author andreiy
  */
 @Stateless
-public class EvennementFacade extends AbstractFacade<Evennement> implements EvennementFacadeLocal {
+public class EvennementFacade extends AbstractFacade<Evenement> implements EvennementFacadeLocal {
     @PersistenceContext(unitName = "com.caco_DAC-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -25,7 +25,7 @@ public class EvennementFacade extends AbstractFacade<Evennement> implements Even
     }
 
     public EvennementFacade() {
-        super(Evennement.class);
+        super(Evenement.class);
     }
     
 }

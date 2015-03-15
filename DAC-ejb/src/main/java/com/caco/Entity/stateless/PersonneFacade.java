@@ -6,9 +6,11 @@
 package com.caco.Entity.stateless;
 
 import com.caco.Entity.Personne;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.yaml.snakeyaml.Yaml;
 
 /**
  *
@@ -39,6 +41,24 @@ public class PersonneFacade extends AbstractFacade<Personne> implements Personne
     public void createFromParam(String email, String prenom, String nom, String password, int age, String adresse){
         Personne p = new Personne(email,prenom,nom,password, age,adresse);
         create(p);
+    }
+    
+    @Override 
+    public void createFromYaml(String yml){
+        
+        Yaml yaml = new Yaml();
+        Personne personne = (Personne) yaml.load(yml);
+        create(personne);
+        
+    }
+    
+    @Override
+    public void createFromObject(Object personne){
+        
+        Map<String, Object> result= (Map<String, Object>) personne;
+        System.out.println(result.toString());
+        //create((Personne) personne);
+        
     }
     
 }

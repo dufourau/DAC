@@ -20,7 +20,11 @@ public interface PersonneFacadeLocal {
     
     void createFromParam(String email, String prenom, String nom, String password, int age, String adresse);
   
+    void createFromYaml(String yml);
+    
     void create(Personne personne);
+    
+    void createFromObject(Object personne);
 
     void edit(Personne personne);
 
