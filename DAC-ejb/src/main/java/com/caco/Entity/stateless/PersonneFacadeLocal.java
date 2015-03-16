@@ -7,6 +7,7 @@ package com.caco.Entity.stateless;
 
 import com.caco.Entity.Personne;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Local;
 
 /**
@@ -19,16 +20,16 @@ public interface PersonneFacadeLocal {
     void createFromNom(String nom);
     
     void createFromParam(String email, String prenom, String nom, String password, int age, String adresse);
-  
-    void createFromYaml(String yml);
-    
+      
     void create(Personne personne);
     
-    void createFromObject(Object personne);
+    void createFromMap(Map<String, Object> personne);
 
     void edit(Personne personne);
 
     void remove(Personne personne);
+    
+    void removeAll();
 
     Personne find(Object id);
 

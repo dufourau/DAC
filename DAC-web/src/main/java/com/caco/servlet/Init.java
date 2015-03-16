@@ -5,47 +5,57 @@
  */
 package com.caco.servlet;
 
+import com.caco.Entity.stateless.EvenementFacadeLocal;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletContextEvent;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
 import javax.ejb.EJB;
+import javax.servlet.ServletContext;
+import javax.servlet.annotation.WebListener;
 import org.yaml.snakeyaml.Yaml;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
-
+@WebListener
 public class Init implements ServletContextListener{
 
-    private static final Logger LOGGER = Logger.getLogger(Init.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(Init.class);
     
     @EJB
     private PersonneFacadeLocal personneFacade;
+    @EJB
+    private EvenementFacadeLocal evenementFacade;
     
     @Override
     public void contextInitialized(ServletContextEvent contextEvent) {
+        // LOGGER.warn("Clearing database");
+        // personneFacade.removeAll();
+        // evenementFacade.removeAll();
+        
+        LOGGER.warn("Loading initial data into database");
+        ServletContext context = contextEvent.getServletContext();
+        Yaml yaml = new Yaml();
         InputStream input;
-        try {
-            input = new FileInputStream(new File("/home/dufourau/NetBeansProjects/DAC/DAC-web/src/init-data.yml"));
-            Yaml yaml = new Yaml();
-            Iterable<Object> personnes = (Iterable<Object>) yaml.loadAll(input);
-            
-            for(Object p : personnes){
-                
-                personneFacade.createFromObject(p);
-                
-            }
-        } catch (FileNotFoundException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
+        
+        LOGGER.debug("Loading personnes");
+        input = context.getResourceAsStream("/WEB-INF/classes/init-personne.yml");
+        Iterable<Object> personnes = yaml.loadAll(input);
+        for (Object personne : personnes){
+            personneFacade.createFromMap((Map<String, Object>) personne);
+        }
+        
+        LOGGER.debug("Loading evenements");
+        input = context.getResourceAsStream("/WEB-INF/classes/init-evenement.yml");
+        Iterable<Object> evenements = yaml.loadAll(input);
+        for (Object evenement : evenements){
+            evenementFacade.createFromMap((Map<String, Object>) evenement);
         }
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent contextEvent) {
-         /* Do Shutdown stuff. */
     }
 
 }

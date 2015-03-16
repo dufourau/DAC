@@ -16,19 +16,29 @@ import javax.persistence.Table;
  *
  * @author andreiy
  */
-@Entity(name="Evennement")
-@Table(name="Evennement")
+@Entity(name="Evenement")
+@Table(name="Evenement")
 public class Evenement implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String Nom;
-    private String Date;
-    private String Ville;
-    private double Prix;
+    private String nom;
+    private String date;
+    private String ville;
+    private double prix;
 
+    public Evenement() {
+    }
+
+    public Evenement(String nom, String date, String ville, double prix) {
+        this.nom = nom;
+        this.date = date;
+        this.ville = ville;
+        this.prix = prix;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -59,7 +69,7 @@ public class Evenement implements Serializable {
 
     @Override
     public String toString() {
-        return "com.caco.Entity.Evennement[ id=" + id + " ]";
+        return "com.caco.Entity.Evenement[ id=" + id + " ]";
     }
 
     public static long getSerialVersionUID() {
@@ -67,35 +77,35 @@ public class Evenement implements Serializable {
     }
 
     public String getNom() {
-        return Nom;
+        return nom;
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public String getVille() {
-        return Ville;
+        return ville;
     }
 
     public double getPrix() {
-        return Prix;
+        return prix;
     }
 
     public void setNom(String Nom) {
-        this.Nom = Nom;
+        this.nom = Nom;
     }
 
     public void setDate(String Date) {
-        this.Date = Date;
+        this.date = Date;
     }
 
     public void setVille(String Ville) {
-        this.Ville = Ville;
+        this.ville = Ville;
     }
 
     public void setPrix(double Prix) {
-        this.Prix = Prix;
+        this.prix = Prix;
     }
     
     

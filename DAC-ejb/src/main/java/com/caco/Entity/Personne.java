@@ -32,11 +32,11 @@ public class Personne implements Serializable {
 
     public Personne(String email, String prenom, String nom, String password, int age, String adresse) {
         this.email = email;
-        //this.prenom = prenom;
-        //this.nom = nom;
+        this.prenom = prenom;
+        this.nom = nom;
         this.password = password;
-        //this.age = age;
-        //this.adresse = adresse;
+        this.age = age;
+        this.adresse = adresse;
     }
 
     public Personne() {

@@ -10,7 +10,8 @@ import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.yaml.snakeyaml.Yaml;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -18,6 +19,9 @@ import org.yaml.snakeyaml.Yaml;
  */
 @Stateless
 public class PersonneFacade extends AbstractFacade<Personne> implements PersonneFacadeLocal {
+    
+    private static final Logger LOGGER = LogManager.getLogger(PersonneFacade.class);
+
     @PersistenceContext(unitName = "com.caco_DAC-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -42,23 +46,23 @@ public class PersonneFacade extends AbstractFacade<Personne> implements Personne
         Personne p = new Personne(email,prenom,nom,password, age,adresse);
         create(p);
     }
-    
-    @Override 
-    public void createFromYaml(String yml){
         
-        Yaml yaml = new Yaml();
-        Personne personne = (Personne) yaml.load(yml);
-        create(personne);
-        
-    }
-    
     @Override
-    public void createFromObject(Object personne){
-        
-        Map<String, Object> result= (Map<String, Object>) personne;
-        System.out.println(result.toString());
-        //create((Personne) personne);
-        
+    public void createFromMap(Map<String, Object> personne){
+        createFromParam(
+                (String) personne.get("email"),
+                (String) personne.get("prenom"), 
+                (String) personne.get("nom"),
+                (String) personne.get("password"),
+                (int) personne.get("age"),
+                (String) personne.get("adresse")
+        );
     }
-    
+
+    @Override
+    public void removeAll() {
+        LOGGER.warn("Removing all rows from table Personne");
+        int deletedCount = em.createQuery("DELETE FROM Personne").executeUpdate();
+        LOGGER.warn("Deleted " + deletedCount + "rows from Personne");
+    }
 }

@@ -31,11 +31,13 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-     
-    <listener>
-      <listener-class>com.caco.servlet.Init</listener-class>
-    </listener>
     
+    <listener>
+	<listener-class>
+            com.caco.servlet.Init
+        </listener-class>
+    </listener>
+        
     <!-- Uncomment the following to activate authentication
         Default user/password is jonas/jonas or tomcat/tomcat-->
     <!--    <security-constraint>

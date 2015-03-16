@@ -1,0 +1,12 @@
+# Attention, concernant les prix, le '.' est primordial
+# si il n'y en a pas, une erreur est levée et le tuple ne sera pas chargé
+---
+nom: "Concert de Johnny Haliday"
+date: 31/03/2015
+ville: Paris
+prix: 49.90
+---
+nom: "Strip-tease de Yannick"
+date: 10/04/2015
+ville: Grenoble
+prix: 0.
