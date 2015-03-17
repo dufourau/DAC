@@ -5,14 +5,20 @@
  */
 package com.caco.servlet;
 
+import com.caco.Entity.Evenement;
+import com.caco.Entity.stateless.EvenementFacadeLocal;
+import com.caco.Init;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -21,6 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "DetailsEvent", urlPatterns = {"/DetailsEvent"})
 public class DetailsEvent extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(DetailsEvent.class);
+
+    @EJB    
+    private EvenementFacadeLocal evenementFacade;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,31 +43,22 @@ public class DetailsEvent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        /*try (PrintWriter out = response.getWriter()) {
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DetailsEvent</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DetailsEvent at " + request.getContextPath() + "</h1>");
-            out.println("Voice les détails de l'event");
-            out.println("</body>");
-            out.println("</html>");
-        }*/
-        String nom = request.getParameter("nom");
+             
+        String idInput = request.getParameter("id");
         
-        System.err.println("----");
-        Enumeration<String> e = request.getParameterNames();
-        while (e.hasMoreElements())
-        { 
-            String t = e.nextElement();
-            System.err.print(t + " : " + request.getParameter(t));
+        Evenement evenement = null;
+        
+        long id;
+        try {
+            id = Long.valueOf(idInput);
+            evenement = evenementFacade.find(id);
+        } catch (NumberFormatException e) {
+            LOGGER.info("Bad input for DetailsEvent, id : \" " + idInput
+                    + "\" is not in a valid number format");
         }
-        request.setAttribute("nomcomplet", nom + " enfin !!!!");
-        getServletContext().getRequestDispatcher("/detailEvent.jsp").forward(request, response);
+        
+        request.setAttribute("evenement", evenement);
+        getServletContext().getRequestDispatcher("/detailEvent.jsp").forward(request, response);       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

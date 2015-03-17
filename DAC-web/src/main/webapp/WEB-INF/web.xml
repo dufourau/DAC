@@ -1,29 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-    <display-name>webapp</display-name>
+    <display-name>E-Caco</display-name>
+    
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.caco.servlet.Login</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>SearchEvent</servlet-name>
         <servlet-class>com.caco.servlet.SearchEvent</servlet-class>
     </servlet>
- 
+    
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>com.caco.servlet.Index</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>About</servlet-name>
+        <jsp-file>about.jsp</jsp-file>
+    </servlet>
+    
+    
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>SearchEvent</servlet-name>
         <url-pattern>/SearchEvent</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/Index</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>About</servlet-name>
+        <url-pattern>/About</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+    
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>Index</welcome-file> 
     </welcome-file-list>
+        
     <resource-ref>
         <description>Connects to database for Ecaco application</description>
         <res-ref-name>jdbc/__dac</res-ref-name>
@@ -33,11 +60,10 @@
     </resource-ref>
     
     <listener>
-	<listener-class>
-            com.caco.servlet.Init
+        <listener-class>
+            com.caco.Init
         </listener-class>
     </listener>
-        
     <!-- Uncomment the following to activate authentication
         Default user/password is jonas/jonas or tomcat/tomcat-->
     <!--    <security-constraint>

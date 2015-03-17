@@ -1,14 +1,14 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
+    <jsp:include page="/nav.jspf" />
+    <jsp:include page="/header.jspf" />
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/index.css" rel="stylesheet">
+        <title>E-Caco</title>
     </head>
     <body>
     <!-- Navigation -->
@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                         <a href="Home">E-Caco</a>
+                         <a href="Index">E-Caco</a>
                     </li>
                     <li>
                         <a href="#">Evenement</a>
@@ -131,17 +131,21 @@
                         <td>Ville</td>
                         <td>Prix</td>
                         <td></td>
-                     
                       </tr>
-                      <tr>
-                      <form action="DetailsEvent" method="get">
-                        <td><input type="hidden" name="nomEvent" value="Festival">Festival</td>
-                        <td><input type="hidden" name="dateEvent" value="01/01/01">01/01/01</td>
-                        <td><input type="hidden" name="lieuEvent" value="Paris">Paris</td>
-                        <td><input type="hidden" name="prixEvent" value="999.9">999.9</td>
-                        <td><button type="submit" class="btn btn-default">Selectionner</button></td>
-                      </form>
-                      </tr>
+                      
+                      <c:forEach var="evenement" items="${evenements}">
+                        <tr>
+                        <form action="DetailsEvent" method="get">
+                          <input type="hidden" name="id" value="${evenement.id}">
+                          <td>${evenement.nom}</td>
+                          <td>${evenement.date}</td>
+                          <td>${evenement.ville}</td>
+                          <td>${evenement.prix}</td>
+                          <td><button type="submit" class="btn btn-default">Sélectionner</button></td>
+                        </form>
+                        </tr>                      
+                      </c:forEach>
+                        
                     </table>
                 </div>
               

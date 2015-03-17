@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.caco.servlet;
+package com.caco;
 
 import com.caco.Entity.stateless.EvenementFacadeLocal;
 import javax.servlet.ServletContextListener;

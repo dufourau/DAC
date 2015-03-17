@@ -5,19 +5,29 @@
  */
 package com.caco.servlet;
 
+import com.caco.Entity.Evenement;
+import com.caco.Entity.stateless.EvenementFacadeLocal;
+import com.caco.Init;
 import java.io.IOException;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
- * @author andreiy
+ * @author pouzaudr
  */
-@WebServlet(name = "Home", urlPatterns = {"/Home"})
-public class Home extends HttpServlet {
+public class Index extends HttpServlet {
+    
+    private static final Logger LOGGER = LogManager.getLogger(Init.class);
+    
+    @EJB
+    private EvenementFacadeLocal evenementFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +40,10 @@ public class Home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-     
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        List<Evenement> evenements = evenementFacade.findAll();
+        
+        request.setAttribute("evenements", evenements);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,7 +82,7 @@ public class Home extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Index servlet";
     }// </editor-fold>
 
 }
