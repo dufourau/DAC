@@ -1,5 +1,6 @@
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -82,7 +83,7 @@
                      <div class="form-group">
                         <label for="inputDate" class="col-sm-2 control-label">Date</label>
                         <div class="col-sm-6">
-                          <input type="date" name="date" class="form-control" id="inputDate" >
+                          <input type="date" name="date" class="form-control" id="inputDate" placeholder="Date">
                         </div>
                      </div>
                         
@@ -96,13 +97,13 @@
                      <div class="form-group">
                         <label for="inputPrixMin" class="col-sm-2 control-label">PrixMin</label>
                         <div class="col-sm-6">
-                          <input type="text" name="prixMin" class="form-control" id="inputEmail3" placeholder="PrixMin" >
+                          <input type="text" name="prixMin" class="form-control" id="inputEmail3" value="0.00" >
                         </div>
                      </div>
                      <div class="form-group">
                         <label for="inputPrixMax" class="col-sm-2 control-label">PrixMax</label>
                         <div class="col-sm-6">
-                          <input type="text" name="prixMax" class="form-control" id="inputEmail3" placeholder="PrixMax" >
+                          <input type="text" name="prixMax" class="form-control" id="inputEmail3" value="3000.00" >
                         </div>
                      </div>   
                      <div class="form-group">
@@ -138,7 +139,7 @@
                         <form action="DetailsEvent" method="get">
                           <input type="hidden" name="id" value="${evenement.id}">
                           <td>${evenement.nom}</td>
-                          <td>${evenement.date}</td>
+                          <td><fmt:formatDate value="${evenement.date}" pattern="dd/mm/yyyy" /></td>
                           <td>${evenement.ville}</td>
                           <td>${evenement.prix}</td>
                           <td><button type="submit" class="btn btn-default">Sélectionner</button></td>

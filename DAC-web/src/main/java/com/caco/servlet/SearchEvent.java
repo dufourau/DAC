@@ -9,8 +9,14 @@ import com.caco.Entity.Evenement;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +31,20 @@ public class SearchEvent extends HttpServlet {
     
     @EJB    
     private EvenementFacadeLocal evenementFacade;
-     
+    
+    public static boolean isDateValid(String date) 
+    {
+        String DATE_FORMAT = "dd/mm/yyyy";
+        try {
+            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+            df.setLenient(false);
+            df.parse(date);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,30 +56,45 @@ public class SearchEvent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       /* response.setContentType("text/html;charset=UTF-8");
-        String nom = request.getParameter("nom");
-        
-        System.err.println("----");
-        Enumeration<String> e = request.getParameterNames();
-        while (e.hasMoreElements())
-        { 
-            String t = e.nextElement();
-            System.err.print(t + " : " + request.getParameter(t));
-        }*/
-        
-        //Recherche d'événements
-        String nom = request.getParameter("nom");
-        String date = request.getParameter("date");
-        String ville = request.getParameter("ville");
-        String prixMin = request.getParameter("prixMin");
-        String prixMax = request.getParameter("prixMax");
-        System.err.println("SearchEvent");
-        List<Evenement> evenements = evenementFacade.findEvents(nom, date, ville, Double.parseDouble(prixMin), Double.parseDouble(prixMax));
-        for(Evenement e : evenements){
-            System.err.println(e.getNom());
+        try {  
+            String PRICE_MATCHER = "\\d+\\.\\d";
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            
+            //Récupération des paramètres et formatage des données
+            String nom = request.getParameter("nom");
+            Date date;
+            String ville = request.getParameter("ville");
+            String prixMin = request.getParameter("prixMin");
+            String prixMax = request.getParameter("prixMax");
+            double prixMinD = 0.0;
+            double prixMaxD = 1000000000.0;
+            boolean isPrixMin = prixMin.matches(PRICE_MATCHER);
+            boolean isPrixMax = prixMax.matches(PRICE_MATCHER);
+            
+            if(isDateValid(request.getParameter("date"))){
+                date = formatter.parse(request.getParameter("date")); 
+            }
+            else{
+                date = formatter.parse("01/01/1970");
+            }
+            
+            if(!prixMin.equals("") && isPrixMin){
+                prixMinD = Double.parseDouble(prixMin);
+            }
+            
+            if(!prixMax.equals("") && isPrixMax){
+                prixMaxD = Double.parseDouble(prixMax);
+            }
+            
+            //Récupération des données
+            List<Evenement> evenements = evenementFacade.findEvents(nom, date, ville, prixMinD, prixMaxD);
+            
+            //Redirection sur la bonne page
+            request.setAttribute("evenements", evenements);
+            getServletContext().getRequestDispatcher("/vue.jsp").forward(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(SearchEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("evenements", evenements);
-        getServletContext().getRequestDispatcher("/vue.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

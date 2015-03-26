@@ -6,11 +6,14 @@
 package com.caco.Entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,15 +27,17 @@ public class Evenement implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    
     private String nom;
-    private String date;
     private String ville;
     private double prix;
 
     public Evenement() {
     }
 
-    public Evenement(String nom, String date, String ville, double prix) {
+    public Evenement(String nom, Date date, String ville, double prix) {
         this.nom = nom;
         this.date = date;
         this.ville = ville;
@@ -80,7 +85,7 @@ public class Evenement implements Serializable {
         return nom;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -96,7 +101,7 @@ public class Evenement implements Serializable {
         this.nom = Nom;
     }
 
-    public void setDate(String Date) {
+    public void setDate(Date Date) {
         this.date = Date;
     }
 

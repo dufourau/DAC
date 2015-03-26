@@ -6,8 +6,12 @@
 package com.caco.Entity.stateless;
 
 import com.caco.Entity.Evenement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,21 +42,25 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
 
     @Override
     public void createFromMap(Map<String, Object> evenement) {
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
         try {
             createFromParam(
                     (String) evenement.get("nom"),
-                    (String) evenement.get("date"), 
+                    (Date) formatter.parse(((String)evenement.get("date"))), 
                     (String) evenement.get("ville"),
                     (double) evenement.get("prix")
             );
         } catch (java.lang.ClassCastException e){
             LOGGER.error("Error while loading Evenement : "
                     + evenement.get("nom") + "\n" + e.getMessage());
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(EvenementFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public void createFromParam(String nom, String date, String ville, double prix) {
+    public void createFromParam(String nom, Date date, String ville, double prix) {
         Evenement e = new Evenement(nom, date, ville, prix);
         create(e);
     }
@@ -65,10 +73,18 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
     }
     
     @Override
-    public List<Evenement> findEvents(String nom, String date, String ville, double prixMin, double prixMax) {
-        String request = "SELECT events FROM Evenement AS events where events.nom=:nom";
+    public List<Evenement> findEvents(String nom, Date date, String ville, double prixMin, double prixMax) {
+        String request = "SELECT events FROM Evenement AS events "
+                + "where LOWER(events.nom) like LOWER(:nom) AND "
+                + "LOWER(events.ville) like LOWER(:ville) AND "
+                + "events.prix >= :prixMin AND events.prix <= :prixMax AND "
+                + "events.date >= :date";
         Query req = em.createQuery(request);
-        req = req.setParameter("nom", nom);
+        req = req.setParameter("nom", "%"+nom+"%");
+        req = req.setParameter("ville", "%"+ville+"%");
+        req = req.setParameter("prixMin", prixMin);
+        req = req.setParameter("prixMax", prixMax);
+        req = req.setParameter("date", date);
         return req.getResultList();
     }
     

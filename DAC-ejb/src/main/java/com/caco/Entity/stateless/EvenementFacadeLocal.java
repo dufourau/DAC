@@ -6,6 +6,7 @@
 package com.caco.Entity.stateless;
 
 import com.caco.Entity.Evenement;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.Local;
@@ -29,13 +30,13 @@ public interface EvenementFacadeLocal {
 
     List<Evenement> findRange(int[] range);
     
-    List<Evenement> findEvents(String nom, String date, String ville, double prixmin, double prixMax);
+    List<Evenement> findEvents(String nom, Date date, String ville, double prixmin, double prixMax);
 
     int count();
 
     void createFromMap(Map<String, Object> evenement);
     
-    void createFromParam(String Nom, String Date, String Ville, double Prix);
+    void createFromParam(String Nom, Date Date, String Ville, double Prix);
         
     void removeAll();
 }
