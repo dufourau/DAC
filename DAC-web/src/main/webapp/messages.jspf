@@ -1,0 +1,47 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:if test="${errors ne null or infos ne null or warnings ne null }">
+    <!-- Modal containing messages -->
+    <script language="JavaScript">
+        $( document ).ready( function() {
+            $('#myModal').modal( 'toggle' );
+        });
+    </script>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <c:if test="${errors ne null}">
+                        <c:forEach var="error" items="${errors}">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-danger">${error}</li>
+                            </ul>
+                        </c:forEach>                        
+                    </c:if>
+                    <c:if test="${warnings ne null}">
+                        <c:forEach var="warning" items="${warnings}">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-warning">${warning}</li>
+                            </ul>
+                        </c:forEach>                        
+                    </c:if>
+                    <c:if test="${infos ne null}">
+                        <c:forEach var="info" items="${infos}">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-info">${info}</li>
+                            </ul>
+                        </c:forEach>                        
+                    </c:if>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data>Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>

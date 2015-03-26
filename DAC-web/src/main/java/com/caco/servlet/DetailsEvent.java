@@ -7,10 +7,7 @@ package com.caco.servlet;
 
 import com.caco.Entity.Evenement;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
-import com.caco.Init;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
