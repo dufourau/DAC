@@ -1,40 +1,17 @@
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <jsp:include page="/nav.jspf" />
     <jsp:include page="/header.jspf" />
+    <jsp:include page="/nav.jspf" />
+    <%@ include file="/messages.jspf" %>
     <head>
         <title>E-Caco</title>
     </head>
     <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-     
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                         <a href="Index">E-Caco</a>
-                    </li>
-                    <li>
-                        <a href="#">Evenement</a>
-                    </li>
-                    <li>
-                        <a href="About">A propos</a>
-                    </li>
-                  
-              
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
     
     <div class="col-md-4">
         

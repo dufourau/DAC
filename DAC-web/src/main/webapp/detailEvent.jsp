@@ -8,8 +8,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-    <jsp:include page="/nav.jspf" />
     <jsp:include page="/header.jspf" />
+    <jsp:include page="/nav.jspf" />
+    <jsp:include page="/messages.jspf" />
     <head>
         <title>
             <c:choose>
