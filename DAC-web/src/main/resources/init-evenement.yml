@@ -1,12 +1,89 @@
 # Attention, concernant les prix, le '.' est primordial
 # si il n'y en a pas, une erreur est levée et le tuple ne sera pas chargé
 ---
-nom: "Concert de Johnny Haliday"
-date: 31/03/2015
+nom: "Barcelone-PSG"
+date: 04/04/2015
 ville: Paris
-prix: 49.90
+prix: 49.9
 ---
 nom: "Strip-tease de Yannick"
 date: 10/04/2015
 ville: Grenoble
 prix: 0.
+---
+nom: "Grande fête du tuning"
+date: 15/06/2016
+ville: Clermont ferrand
+prix: 15.5
+---
+nom: "Soirée de la crèpe"
+date: 30/05/2015
+ville: Brest
+prix: 5.
+---
+nom: "Jeux olympiques"
+date: 01/08/2030
+ville: Dunkerque
+prix: 999.99
+---
+nom: "Banquet annuel de la charcuterie"
+date: 23/09/2015
+ville: Toulouse
+prix: 20.
+---
+nom: "Journée de la famille"
+date: 06/05/1992
+ville: Dunkerque
+prix: 7.5
+---
+nom: "Concert de Magic System"
+date: 10/12/2016
+ville: Bamako
+prix: 10.
+---
+nom: "Bal de l'école polytechnique"
+date: 25/05/2015
+ville: Versaille
+prix: 525.
+---
+nom: "Finale de la ligue des champions Monaco-PSG"
+date: 25/05/2015
+ville: Berlin
+prix: 92.5
+---
+nom: "Congrés du parti communiste"
+date: 25/05/2015
+ville: Neuilly sur Seine
+prix: 2500.50
+---
+nom: "Soutenance de DAC"
+date: 03/04/2015
+ville: Saint-Martin-d'Heres
+prix: 1.
+---
+nom: "Revanche FIFA"
+date: 04/04/2015
+ville: Grenoble
+prix: 0.
+---
+nom: "Week end romantique surprise"
+date: 01/01/2015
+ville: Guantanamo
+prix: 100.
+---
+nom: "Concert des kakos"
+date: 28/08/2015
+ville: Grenoble
+prix: 15.
+---
+nom: "Feu d'artifice géant"
+date: 30/08/2015
+ville: Bagdad
+prix: 13.
+---
+nom: "Congrès de la faluche"
+date: 30/06/2015
+ville: Marseille
+prix: 1500.
+
+
