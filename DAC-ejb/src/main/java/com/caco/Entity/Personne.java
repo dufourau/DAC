@@ -6,6 +6,7 @@
 package com.caco.Entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Personne implements Serializable {
     private String password;
     private int age;
     private String adresse;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Panier panier;
 
     public Personne(String email, String prenom, String nom, String password, int age, String adresse) {
