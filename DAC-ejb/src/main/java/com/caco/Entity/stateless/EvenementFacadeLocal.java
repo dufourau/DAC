@@ -28,6 +28,8 @@ public interface EvenementFacadeLocal {
     List<Evenement> findAll();
 
     List<Evenement> findRange(int[] range);
+    
+    List<Evenement> findEvents(String nom, String date, String ville, double prixmin, double prixMax);
 
     int count();
 

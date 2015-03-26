@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%-- 
     Document   : vue
     Created on : 27 févr. 2015, 16:20:19
@@ -14,39 +15,22 @@
         <title>Recherche d'évennement</title>
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-     
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                         <a href="Home">E-Caco</a>
-                    </li>
-                    <li>
-                        <a href="#">Evenement</a>
-                    </li>
-                    <li>
-                        <a href="About">A Propos</a>
-                    </li>
-                  
-              
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-        
+    <jsp:include page="/nav.jspf" />
+    <jsp:include page="/header.jspf" />
      <!-- Page Content -->
     <div class="container">
-        <h1>Résultat de la recherche</h1>
-        Résultat de la recherche  <br/>
-        Nom = ${param.nom} </br>
-        Date = ${param.date} </br>
-        Ville = ${param.ville} </br>
-        Prix minimum = ${param.prixMin} </br>
-        Prix maximum = ${param.prixMax} </br>
+        <c:forEach var="evenement" items="${evenements}">
+            <tr>
+            <form action="DetailsEvent" method="get">
+                <input type="hidden" name="id" value="${evenement.id}">
+                <td>${evenement.nom}</td>
+                <td>${evenement.date}</td>
+                <td>${evenement.ville}</td>
+                <td>${evenement.prix}</td>
+                <td><button type="submit" class="btn btn-default">Sélectionner</button></td>
+            </form>
+            </tr>                     
+        </c:forEach>
     </div>
     </body>
 </html>
