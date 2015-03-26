@@ -6,10 +6,12 @@
 package com.caco.Entity.stateless;
 
 import com.caco.Entity.Evenement;
+import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -60,6 +62,14 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
         LOGGER.warn("Removing all rows from table Evenement");
         int deletedCount = em.createQuery("DELETE FROM Evenement").executeUpdate();
         LOGGER.warn("Deleted " + deletedCount + "rows from Evenement");
+    }
+    
+    @Override
+    public List<Evenement> findEvents(String nom, String date, String ville, double prixMin, double prixMax) {
+        String request = "SELECT events FROM Evenement AS events where events.nom=:nom";
+        Query req = em.createQuery(request);
+        req = req.setParameter("nom", nom);
+        return req.getResultList();
     }
     
 }

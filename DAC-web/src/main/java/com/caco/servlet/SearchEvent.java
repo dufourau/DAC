@@ -5,9 +5,13 @@
  */
 package com.caco.servlet;
 
+import com.caco.Entity.Evenement;
+import com.caco.Entity.stateless.EvenementFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +22,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author andreiy
  */
 public class SearchEvent extends HttpServlet {
-
+    
+    @EJB    
+    private EvenementFacadeLocal evenementFacade;
+     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,7 +37,7 @@ public class SearchEvent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+       /* response.setContentType("text/html;charset=UTF-8");
         String nom = request.getParameter("nom");
         
         System.err.println("----");
@@ -39,8 +46,20 @@ public class SearchEvent extends HttpServlet {
         { 
             String t = e.nextElement();
             System.err.print(t + " : " + request.getParameter(t));
-        }
+        }*/
         
+        //Recherche d'événements
+        String nom = request.getParameter("nom");
+        String date = request.getParameter("date");
+        String ville = request.getParameter("ville");
+        String prixMin = request.getParameter("prixMin");
+        String prixMax = request.getParameter("prixMax");
+        System.err.println("SearchEvent");
+        List<Evenement> evenements = evenementFacade.findEvents(nom, date, ville, Double.parseDouble(prixMin), Double.parseDouble(prixMax));
+        for(Evenement e : evenements){
+            System.err.println(e.getNom());
+        }
+        request.setAttribute("evenements", evenements);
         getServletContext().getRequestDispatcher("/vue.jsp").forward(request, response);
     }
 
