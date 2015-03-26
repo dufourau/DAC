@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,6 +30,8 @@ public class Personne implements Serializable {
     private String password;
     private int age;
     private String adresse;
+    @OneToOne
+    private Panier panier;
 
     public Personne(String email, String prenom, String nom, String password, int age, String adresse) {
         this.email = email;
@@ -37,6 +40,7 @@ public class Personne implements Serializable {
         this.password = password;
         this.age = age;
         this.adresse = adresse;
+        this.panier = new Panier();
     }
 
     public Personne() {
