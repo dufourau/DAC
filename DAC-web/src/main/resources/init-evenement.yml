@@ -1,89 +1,107 @@
 # Attention, concernant les prix, le '.' est primordial
 # si il n'y en a pas, une erreur est levée et le tuple ne sera pas chargé
+
 ---
 nom: "Barcelone-PSG"
 date: 04/04/2015
 ville: Paris
 prix: 49.9
+categorie: SPORT
 ---
 nom: "Strip-tease de Yannick"
 date: 10/04/2015
 ville: Grenoble
 prix: 0.
+categorie: SPORT
 ---
 nom: "Grande fête du tuning"
 date: 15/06/2016
 ville: Clermont-Ferrand
 prix: 15.5
+categorie: SPORT
 ---
 nom: "Soirée de la crèpe"
 date: 30/05/2015
 ville: Brest
 prix: 5.
+categorie: SPORT
 ---
 nom: "Jeux olympiques"
 date: 01/08/2030
 ville: Dunkerque
 prix: 999.99
+categorie: SPORT
 ---
 nom: "Banquet annuel de la charcuterie"
 date: 23/09/2015
 ville: Toulouse
 prix: 20.
+categorie: SPORT
 ---
 nom: "Journée de la famille"
 date: 06/05/1992
 ville: Dunkerque
 prix: 7.5
+categorie: SPORT
 ---
 nom: "Concert de Magic System"
 date: 10/12/2016
 ville: Bamako
 prix: 10.
+categorie: SPORT
 ---
 nom: "Bal de l'école polytechnique"
 date: 25/05/2015
 ville: Versaille
 prix: 525.
+categorie: SPORT
 ---
 nom: "Finale de la ligue des champions Monaco-PSG"
 date: 25/05/2015
 ville: Berlin
 prix: 92.5
+categorie: SPORT
 ---
 nom: "Congrés du parti communiste"
 date: 25/05/2015
 ville: Neuilly sur Seine
 prix: 2500.50
+categorie: SPORT
 ---
 nom: "Soutenance de DAC"
 date: 03/04/2015
 ville: Saint-Martin-d'Heres
 prix: 1.
+categorie: SPORT
 ---
 nom: "Revanche FIFA"
 date: 04/04/2015
 ville: Grenoble
 prix: 0.
+categorie: SPORT
 ---
 nom: "Week end romantique surprise"
 date: 01/01/2015
 ville: Guantanamo
 prix: 100.
+categorie: SPORT
 ---
 nom: "Concert des kakos"
 date: 28/08/2015
 ville: Grenoble
 prix: 15.
+categorie: SPORT
 ---
 nom: "Feu d'artifice géant"
 date: 30/08/2015
 ville: Bagdad
 prix: 13.
+categorie: SPORT
 ---
 nom: "Congrès de la faluche"
 date: 30/06/2015
 ville: Marseille
 prix: 1500.
+categorie: SPORT
 
 

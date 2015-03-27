@@ -66,6 +66,7 @@ public class SearchEvent extends HttpServlet {
             String ville = request.getParameter("ville");
             String prixMin = request.getParameter("prixMin");
             String prixMax = request.getParameter("prixMax");
+            String categorie = request.getParameter("categorie");
             double prixMinD = 0.0;
             double prixMaxD = 1000000000.0;
             boolean isPrixMin = prixMin.matches(PRICE_MATCHER);
@@ -87,7 +88,7 @@ public class SearchEvent extends HttpServlet {
             }
             
             //Récupération des données
-            List<Evenement> evenements = evenementFacade.findEvents(nom, date, ville, prixMinD, prixMaxD);
+            List<Evenement> evenements = evenementFacade.findEvents(nom, date, ville, prixMinD, prixMaxD, categorie);
             
             //Redirection sur la bonne page
             request.setAttribute("evenements", evenements);

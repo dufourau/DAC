@@ -5,6 +5,7 @@
  */
 package com.caco.Entity.stateless;
 
+import com.caco.Entity.Categorie;
 import com.caco.Entity.Evenement;
 import java.util.Date;
 import java.util.List;
@@ -30,13 +31,13 @@ public interface EvenementFacadeLocal {
 
     List<Evenement> findRange(int[] range);
     
-    List<Evenement> findEvents(String nom, Date date, String ville, double prixmin, double prixMax);
+    List<Evenement> findEvents(String nom, Date date, String ville, double prixmin, double prixMax, String categorie);
 
     int count();
 
     void createFromMap(Map<String, Object> evenement);
     
-    void createFromParam(String Nom, Date Date, String Ville, double Prix);
+    void createFromParam(String Nom, Date Date, String Ville, double Prix, Categorie categorie);
         
     void removeAll();
 }
