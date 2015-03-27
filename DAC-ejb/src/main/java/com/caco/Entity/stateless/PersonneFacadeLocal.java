@@ -32,6 +32,8 @@ public interface PersonneFacadeLocal {
     void removeAll();
 
     Personne find(Object id);
+    
+    Personne find(String email, String password);
 
     List<Personne> findAll();
 

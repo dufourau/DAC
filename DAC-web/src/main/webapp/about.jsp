@@ -9,7 +9,7 @@
 <html>
     <jsp:include page="/header.jspf" />
     <jsp:include page="/nav.jspf" />
-    <jsp:include page="/messages.jspf" />
+    <%@ include file="/messages.jspf" %>
     <head>
         <title>About Us</title>
     </head>

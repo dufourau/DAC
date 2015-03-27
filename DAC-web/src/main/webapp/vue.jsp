@@ -9,15 +9,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <jsp:include page="/header.jspf" />
+    <jsp:include page="/nav.jspf" />
+    <%@ include file="/messages.jspf" %>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/index.css" rel="stylesheet">
         <title>Recherche d'évennement</title>
     </head>
     <body>
-    <jsp:include page="/nav.jspf" />
-    <jsp:include page="/header.jspf" />
      <!-- Page Content -->
     <div class="container">
         <div class="row">

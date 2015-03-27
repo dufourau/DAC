@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -64,5 +65,19 @@ public class PersonneFacade extends AbstractFacade<Personne> implements Personne
         LOGGER.warn("Removing all rows from table Personne");
         int deletedCount = em.createQuery("DELETE FROM Personne").executeUpdate();
         LOGGER.warn("Deleted " + deletedCount + "rows from Personne");
+    }
+
+    @Override
+    public Personne find(String email, String password) {
+        String request = "SELECT p FROM Personne AS p "
+                + "where p.email = :email AND p.password = :password";
+        Query req = em.createQuery(request, Personne.class);
+        req = req.setParameter("email", email);
+        req = req.setParameter("password", password);
+        try {
+            return (Personne) req.getSingleResult();
+        } catch (javax.persistence.NoResultException e){
+            return null;
+        }
     }
 }

@@ -9,7 +9,6 @@ import com.caco.Entity.Personne;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -20,9 +19,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author dufourau
+ * @author pouzaudr
  */
-public class Login extends HttpServlet {
+public class Logout extends HttpServlet {
     
     @EJB
     private PersonneFacadeLocal personneFacade;
@@ -38,27 +37,8 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        Personne user = personneFacade.find(email, password);
-        
-        List<String> errors = new ArrayList<>();
-        List<String> infos = new ArrayList<>();
-        
-        if (user == null){
-            errors.add("Nom d'utilisateur ou mot de passe incorrect");
-            request.setAttribute("errors", errors);
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-        } else {
-            infos.add("Connexion réussie");
-            request.setAttribute("infos", infos);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            response.sendRedirect("./");
-        }
-        
-       
+        request.getSession().invalidate();
+        response.sendRedirect("./");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
