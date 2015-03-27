@@ -5,6 +5,7 @@
  */
 package com.caco.Entity.stateless;
 
+import com.caco.Entity.Categorie;
 import com.caco.Entity.Evenement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,7 +50,8 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
                     (String) evenement.get("nom"),
                     (Date) formatter.parse(((String)evenement.get("date"))), 
                     (String) evenement.get("ville"),
-                    (double) evenement.get("prix")
+                    (double) evenement.get("prix"),
+                    Categorie.fromString((String) evenement.get("categorie"))
             );
         } catch (java.lang.ClassCastException e){
             LOGGER.error("Error while loading Evenement : "
@@ -60,8 +62,8 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
     }
 
     @Override
-    public void createFromParam(String nom, Date date, String ville, double prix) {
-        Evenement e = new Evenement(nom, date, ville, prix);
+    public void createFromParam(String nom, Date date, String ville, double prix, Categorie categorie) {
+        Evenement e = new Evenement(nom, date, ville, prix, categorie);
         create(e);
     }
 
@@ -73,18 +75,29 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
     }
     
     @Override
-    public List<Evenement> findEvents(String nom, Date date, String ville, double prixMin, double prixMax) {
+    public List<Evenement> findEvents(String nom, Date date, String ville, double prixMin, double prixMax, String categorie) {
         String request = "SELECT events FROM Evenement AS events "
                 + "where LOWER(events.nom) like LOWER(:nom) AND "
                 + "LOWER(events.ville) like LOWER(:ville) AND "
                 + "events.prix >= :prixMin AND events.prix <= :prixMax AND "
                 + "events.date >= :date";
+        
+        //si l'utilisateur cherche une catégorie spécifique
+        if(!categorie.equals("TOUTES")){  
+            request += " AND events.categorie = :cat";
+        }
+        
+        //Création de la requête et set des paramètres
         Query req = em.createQuery(request);
         req = req.setParameter("nom", "%"+nom+"%");
         req = req.setParameter("ville", "%"+ville+"%");
         req = req.setParameter("prixMin", prixMin);
         req = req.setParameter("prixMax", prixMax);
         req = req.setParameter("date", date);
+        if(!categorie.equals("TOUTES")){
+            req = req.setParameter("cat", Categorie.fromString(categorie));
+        }
+        
         return req.getResultList();
     }
     

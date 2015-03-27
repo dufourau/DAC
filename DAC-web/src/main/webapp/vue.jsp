@@ -29,6 +29,7 @@
                         <td>Date</td>
                         <td>Ville</td>
                         <td>Prix</td>
+                        <td>Categorie</td>
                         <td></td>
                       </tr>
                       
@@ -40,6 +41,7 @@
                           <td><fmt:formatDate value="${evenement.date}" pattern="dd/mm/yyyy" /></td>
                           <td>${evenement.ville}</td>
                           <td>${evenement.prix}</td>
+                          <td>${evenement.categorie}</td>
                           <td><button type="submit" class="btn btn-default">Sélectionner</button></td>
                         </form>
                         </tr>                      

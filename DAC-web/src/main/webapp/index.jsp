@@ -20,32 +20,60 @@
         <c:choose> 
             <c:when test="${sessionScope.user eq null}">
                 <div class="well">
-                    <form class="form-horizontal" action="Login" method="POST">  
+                    <h4>Recherche</h4>
+                    <form class="form-horizontal" action="SearchEvent" method="get">  
+                    <div class="form-group">
+                        <label for="inputNom" class="col-sm-3 control-label">Nom</label>
+                        <div class="col-sm-6">
+                          <input type="text" name="nom" class="form-control" id="inputEmail3" placeholder="Nom">
+                        </div>
+                     </div>
                      <div class="form-group">
-                         <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-                         <div class="col-sm-6">
-                           <input type="email" class="form-control" name="email" placeholder="Email">
-                         </div>
-                      </div>
-                      <div class="form-group">
-                         <label for="inputPassword" class="col-sm-2 control-label">Mot de passe</label>
-                         <div class="col-sm-6">
-                           <input type="password" class="form-control" name="password" placeholder="Mot de passe">
-                         </div>
-                      </div>
-                      <div class="form-group">
-                         <div class="col-sm-offset-2 col-sm-2">
-                           <button type="submit" class="btn btn-default">Connexion</button>
-                         </div>
-                      </div>
-                     </form>
-                     <form action="Inscription" class="form-horizontal">
-                      <div class="form-group">
-                         <div class="col-sm-offset-2 col-sm-2">
-                           <button type="submit" class="btn btn-default">Inscription</button>
-                         </div>
-                      </div>
-                    </form>
+                        <label for="inputDate" class="col-sm-3 control-label">Date</label>
+                        <div class="col-sm-6">
+                          <input type="date" name="date" class="form-control" id="inputDate" placeholder="Date">
+                        </div>
+                     </div>
+                        
+                     <div class="form-group">
+                        <label for="inputVille" class="col-sm-3 control-label">Ville</label>
+                        <div class="col-sm-6">
+                          <input type="text" name="ville" class="form-control" id="inputVille" placeholder="Ville">
+                        </div>
+                     </div>
+                        
+                     <div class="form-group">
+                        <label for="inputPrixMin" class="col-sm-3 control-label">PrixMin</label>
+                        <div class="col-sm-6">
+                          <input type="text" name="prixMin" class="form-control" id="inputEmail3" value="0.00" >
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="inputPrixMax" class="col-sm-3 control-label">PrixMax</label>
+                        <div class="col-sm-6">
+                          <input type="text" name="prixMax" class="form-control" id="inputEmail3" value="3000.00" >
+                        </div>
+                     </div> 
+                     <div class="form-group">
+                        <label for="inputCategorie" class="col-sm-3 control-label">Categorie</label>
+                        <div class="col-sm-6">
+                            <select id="divisionInput" name="categorie" type="text" required="" class="form-control input-md">
+                                <option value="SPORT">Sport</option>
+                                <option value="CONCERT">Concert</option>
+                                <option value="SPECTACLE">Spectacle</option>
+                                <option value="DIVERS">Divers</option>
+                                <option value="TOUTES" selected="">Toute catégorie</option>
+                            </select>
+                        </div>
+                     </div> 
+                     <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-2">
+                          <button type="submit" class="btn btn-default">Rechercher</button>
+                        </div>
+                     </div>
+                     
+                   </form>
+                    <!-- /.row -->
                 </div>
             </c:when>
             <c:otherwise>
@@ -117,6 +145,7 @@
                         <td>Date</td>
                         <td>Ville</td>
                         <td>Prix</td>
+                        <td>Categorie</td>
                         <td></td>
                       </tr>
                       
@@ -128,6 +157,7 @@
                           <td><fmt:formatDate value="${evenement.date}" pattern="dd/mm/yyyy" /></td>
                           <td>${evenement.ville}</td>
                           <td>${evenement.prix}</td>
+                          <td>${evenement.categorie}</td>
                           <td><button type="submit" class="btn btn-default">Sélectionner</button></td>
                         </form>
                         </tr>                      

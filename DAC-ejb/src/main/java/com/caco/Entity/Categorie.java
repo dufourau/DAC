@@ -14,4 +14,22 @@ public enum Categorie {
     CONCERT,
     SPECTACLE,
     DIVERS;  
+    
+    public static Categorie fromString(String categorie){
+        if(categorie.equals("SPORT")){
+            return SPORT;
+        }
+        else if(categorie.equals("CONCERT")){
+            return CONCERT;
+        }
+        else if(categorie.equals("SPECTACLE")){
+            return SPECTACLE;
+        }
+        else if(categorie.equals("DIVERS")){
+            return DIVERS;
+        }
+        else{
+            return null;
+        }
+    }
 }

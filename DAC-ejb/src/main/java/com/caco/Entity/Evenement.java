@@ -8,6 +8,8 @@ package com.caco.Entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,15 +36,19 @@ public class Evenement implements Serializable {
     private String nom;
     private String ville;
     private double prix;
+    
+    @Enumerated(EnumType.STRING)
+    private Categorie categorie;
 
     public Evenement() {
     }
 
-    public Evenement(String nom, Date date, String ville, double prix) {
+    public Evenement(String nom, Date date, String ville, double prix, Categorie categorie) {
         this.nom = nom;
         this.date = date;
         this.ville = ville;
         this.prix = prix;
+        this.categorie = categorie;
     }
     
     public Long getId() {
@@ -97,6 +103,10 @@ public class Evenement implements Serializable {
     public double getPrix() {
         return prix;
     }
+    
+    public Categorie getCategorie(){
+        return categorie;
+    }
 
     public void setNom(String Nom) {
         this.nom = Nom;
@@ -112,6 +122,10 @@ public class Evenement implements Serializable {
 
     public void setPrix(double Prix) {
         this.prix = Prix;
+    }
+    
+    public void setCategorie(Categorie Categorie){
+        this.categorie = Categorie;
     }
     
     
