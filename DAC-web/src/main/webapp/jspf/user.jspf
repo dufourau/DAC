@@ -1,0 +1,20 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:choose> 
+    <c:when test="${sessionScope.user eq null}">
+        <%@ include file="/jspf/login.jspf" %>
+    </c:when>
+    <c:otherwise>
+        <div class="well">
+            <h4>${sessionScope.user.email}</h4>
+            <a href="./Logout"><button type="button" class="btn btn-default pull-right">Déconnexion</button></a>
+            <h4>Mon panier</h4>
+            <h3>Montant total : ${sessionScope.user.getPanier().getValeur()} &euro;</h3>
+            <c:forEach var="reservation" items="${sessionScope.user.panier.getReservations()}">
+                <tr>
+                  ${reservation.getEvenement().nom}
+                </tr>
+            </c:forEach>
+        </div>
+    </c:otherwise>
+</c:choose>

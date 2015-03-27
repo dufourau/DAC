@@ -9,9 +9,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <jsp:include page="/header.jspf" />
-    <jsp:include page="/nav.jspf" />
-    <%@ include file="/messages.jspf" %>
+    <jsp:include page="/jspf/header.jspf" />
+    <%@ include file="/jspf/nav.jspf" %>
+    <%@ include file="/jspf/messages.jspf" %>
     <head>
         <title>Recherche d'évennement</title>
     </head>
@@ -27,7 +27,7 @@
                       <tr>
                         <td>Nom</td>
                         <td>Date</td>
-                        <td>Ville</td>
+                        <td>Lieu</td>
                         <td>Prix</td>
                         <td>Categorie</td>
                         <td></td>
@@ -39,7 +39,7 @@
                           <input type="hidden" name="id" value="${evenement.id}">
                           <td>${evenement.nom}</td>
                           <td><fmt:formatDate value="${evenement.date}" pattern="dd/mm/yyyy" /></td>
-                          <td>${evenement.ville}</td>
+                          <td>${evenement.lieu}</td>
                           <td>${evenement.prix}</td>
                           <td>${evenement.categorie}</td>
                           <td><button type="submit" class="btn btn-default">Sélectionner</button></td>

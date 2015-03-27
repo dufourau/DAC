@@ -1,0 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<div class="well">
+    <h4>${sessionScope.user.email}</h4>
+    <a href="./Logout"><button type="button" class="btn btn-default pull-right">Déconnexion</button></a>
+    <h4>Mon panier</h4>
+</div>

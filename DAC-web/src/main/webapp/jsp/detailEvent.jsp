@@ -8,9 +8,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-    <jsp:include page="/header.jspf" />
-    <jsp:include page="/nav.jspf" />
-    <%@ include file="/messages.jspf" %>
+    <jsp:include page="/jspf/header.jspf" />
+    <%@ include file="/jspf/nav.jspf" %>
+    <%@ include file="/jspf/messages.jspf" %>
     <head>
         <title>
             <c:choose>
@@ -37,7 +37,7 @@
                 <td>${evenement.date}</td>
             </tr>   
             <tr>
-                <td>${evenement.ville}</td>
+                <td>${evenement.lieu}</td>
             </tr>   
             <tr>
                 <td>${evenement.prix}</td>                
@@ -45,6 +45,12 @@
         </table>
         <form class="form-horizontal" action="AjouterPanier" method="get">
             <input type="hidden" name="id" value="${evenement.id}"/>
+            <div class="form-group">
+               <div class="col-sm-offset-2 col-sm-2">
+                   <label for="number">Nombre de tickets</label>
+                   <input id="number" name="number" type="number" value="0" min="0"/>
+               </div>
+            </div>
             <div class="form-group">
                <div class="col-sm-offset-2 col-sm-2">
                  <button type="submit" class="btn btn-default">Ajouter au panier</button>

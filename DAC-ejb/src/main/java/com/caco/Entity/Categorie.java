@@ -10,26 +10,38 @@ package com.caco.Entity;
  * @author clementlinares
  */
 public enum Categorie {
-    SPORT,
-    CONCERT,
-    SPECTACLE,
-    DIVERS;  
+    SPORT("Sport"),
+    CONCERT("Concert"),
+    SPECTACLE("Spectacle"),
+    DIVERS("Divers");  
+    
+    private final String name;       
+
+    private Categorie(String s) {
+        name = s;
+    }
+
     
     public static Categorie fromString(String categorie){
-        if(categorie.equals("SPORT")){
+        if(categorie.equalsIgnoreCase("SPORT")){
             return SPORT;
         }
-        else if(categorie.equals("CONCERT")){
+        else if(categorie.equalsIgnoreCase("CONCERT")){
             return CONCERT;
         }
-        else if(categorie.equals("SPECTACLE")){
+        else if(categorie.equalsIgnoreCase("SPECTACLE")){
             return SPECTACLE;
         }
-        else if(categorie.equals("DIVERS")){
+        else if(categorie.equalsIgnoreCase("DIVERS")){
             return DIVERS;
         }
         else{
             return null;
         }
+    }
+    
+    @Override
+    public String toString(){
+        return name;
     }
 }

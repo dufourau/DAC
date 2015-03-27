@@ -1,3 +1,18 @@
 body {
     padding-top: 70px;
 }
+
+.event {
+    border: 1px solid #eee;
+    border-radius: 3px;
+    border-width: 1px;
+    border-left-width: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-left-color: #3498db;
+}
+
+.event>.panel-heading {
+    border-bottom: 1px solid #eee;
+    background-color: #f5f5f5;
+}

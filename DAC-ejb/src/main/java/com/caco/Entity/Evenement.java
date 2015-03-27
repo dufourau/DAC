@@ -13,7 +13,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,8 +33,9 @@ public class Evenement implements Serializable {
     private Date date;
     
     private String nom;
-    private String ville;
+    private String lieu;
     private double prix;
+    private int quantiteDisponible;
     
     @Enumerated(EnumType.STRING)
     private Categorie categorie;
@@ -43,12 +43,13 @@ public class Evenement implements Serializable {
     public Evenement() {
     }
 
-    public Evenement(String nom, Date date, String ville, double prix, Categorie categorie) {
+    public Evenement(String nom, Date date, String lieu, double prix, Categorie categorie, int quantiteInitiale) {
         this.nom = nom;
         this.date = date;
-        this.ville = ville;
+        this.lieu = lieu;
         this.prix = prix;
         this.categorie = categorie;
+        this.quantiteDisponible = quantiteInitiale;
     }
     
     public Long getId() {
@@ -96,8 +97,8 @@ public class Evenement implements Serializable {
         return date;
     }
 
-    public String getVille() {
-        return ville;
+    public String getLieu() {
+        return lieu;
     }
 
     public double getPrix() {
@@ -117,7 +118,7 @@ public class Evenement implements Serializable {
     }
 
     public void setVille(String Ville) {
-        this.ville = Ville;
+        this.lieu = Ville;
     }
 
     public void setPrix(double Prix) {
@@ -128,5 +129,13 @@ public class Evenement implements Serializable {
         this.categorie = Categorie;
     }
     
+    public int reserverTickets(int numberOfTickets) throws RuptureDeStockException {
+        if (this.quantiteDisponible < numberOfTickets) {
+            throw new RuptureDeStockException(this, numberOfTickets);
+        } else {
+            this.quantiteDisponible = this.quantiteDisponible - numberOfTickets;
+            return this.quantiteDisponible;
+        }
+    }
     
 }

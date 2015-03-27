@@ -8,6 +8,7 @@ package com.caco.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,37 +27,44 @@ public class Panier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany
-    private List<Evenement> evenenements = new ArrayList<>();;
-    private double valeur;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservations;
 
     public Panier() {
-        this.valeur = 0;
-        this.evenenements = new ArrayList<Evenement>();
+        this.reservations = new ArrayList<>();
     }
 
-    public Panier(Long id, List<Evenement> evenenements, double valeur) {
+    public Panier(Long id, List<Reservation> reservations, double valeur) {
         this.id = id;
-        this.evenenements = evenenements;
-        this.valeur = valeur;
+        this.reservations = reservations;
     }
 
-    public void addEvenement(Evenement e){
-        this.valeur += e.getPrix();
-        this.evenenements.add(e);
+    public void addReservation(Reservation reservation) throws RuptureDeStockException{
+        for (Reservation r : this.reservations){
+            if (r.getEvenement().getId().equals(reservation.getEvenement().getId())){
+                r.ajouterTicket(reservation.getNumberOfTickets());
+                return;
+            }
+        }
+        reservation.reserverTicket();
+        this.reservations.add(reservation);
     }
     
-    public List<Evenement> getEvenements() {
-        return evenenements;
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 
     public double getValeur() {
+        double valeur = 0;
+        for (Reservation r : this.reservations){
+            valeur += r.getPrix();
+        }
         return valeur;
     }
 
     @Override
     public String toString() {
-        return "Panier{" + "id=" + id + ", evenenements=" + evenenements + ", valeur=" + valeur + '}';
+        return "Panier{" + "id=" + id + ", evenenements=" + reservations + ", valeur=" + getValeur() + '}';
     }
     
 }

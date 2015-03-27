@@ -55,7 +55,7 @@ public class DetailsEvent extends HttpServlet {
         }
         
         request.setAttribute("evenement", evenement);
-        getServletContext().getRequestDispatcher("/detailEvent.jsp").forward(request, response);       
+        getServletContext().getRequestDispatcher("/jsp/detailEvent.jsp").forward(request, response);       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

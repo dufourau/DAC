@@ -44,14 +44,11 @@ public class Login extends HttpServlet {
         Personne user = personneFacade.find(email, password);
         
         List<String> errors = new ArrayList<>();
-        List<String> infos = new ArrayList<>();
         
         if (user == null){
             errors.add("Nom d'utilisateur ou mot de passe incorrect");
             request.setAttribute("errors", errors);
         } else {
-            infos.add("Connexion réussie");
-            request.setAttribute("infos", infos);
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
         }

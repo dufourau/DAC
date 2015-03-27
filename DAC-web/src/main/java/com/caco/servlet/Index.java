@@ -43,7 +43,7 @@ public class Index extends HttpServlet {
         List<Evenement> evenements = evenementFacade.findAll();
         
         request.setAttribute("evenements", evenements);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

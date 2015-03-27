@@ -6,9 +6,9 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <jsp:include page="/header.jspf" />
-    <jsp:include page="/nav.jspf" />
-    <%@ include file="/messages.jspf" %>
+    <jsp:include page="/jspf/header.jspf" />
+    <%@ include file="/jspf/nav.jspf" %>
+    <%@ include file="/jspf/messages.jspf" %>
     <head>
         <title>E-Caco</title>
     </head>
@@ -16,52 +16,7 @@
     
     <div class="col-md-4">
 
-        <!-- Login box -->
-        <c:choose> 
-            <c:when test="${sessionScope.user eq null}">
-                <div class="well">
-                    <form class="form-horizontal" action="Login" method="POST">  
-                     <div class="form-group">
-                         <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-                         <div class="col-sm-6">
-                           <input type="email" class="form-control" name="email" placeholder="Email">
-                         </div>
-                      </div>
-                      <div class="form-group">
-                         <label for="inputPassword" class="col-sm-2 control-label">Mot de passe</label>
-                         <div class="col-sm-6">
-                           <input type="password" class="form-control" name="password" placeholder="Mot de passe">
-                         </div>
-                      </div>
-                      <div class="form-group">
-                         <div class="col-sm-offset-2 col-sm-2">
-                           <button type="submit" class="btn btn-default">Connexion</button>
-                         </div>
-                      </div>
-                     </form>
-                     <form action="Inscription" class="form-horizontal">
-                      <div class="form-group">
-                         <div class="col-sm-offset-2 col-sm-2">
-                           <button type="submit" class="btn btn-default">Inscription</button>
-                         </div>
-                      </div>
-                    </form>
-                </div>
-            </c:when>
-            <c:otherwise>
-                <div class="well">
-                    <h4>${sessionScope.user.email}</h4>
-                    <a href="./Logout"><button type="button" class="btn btn-default pull-right">Déconnexion</button></a>
-                    <h4>Mon panier</h4>
-                    <h3>Montant total : ${sessionScope.user.getPanier().getValeur()} €</h3>
-                    <c:forEach var="evenement" items="${sessionScope.user.panier.getEvenements()}">
-                        <tr>
-                          ${evenement.nom}
-                        </tr>
-                    </c:forEach>
-                </div>
-            </c:otherwise>
-        </c:choose>
+        <%@ include file="/jspf/user.jspf" %>
 
         <!-- Search box -->
         <div class="well">
@@ -146,7 +101,7 @@
                           <input type="hidden" name="id" value="${evenement.id}">
                           <td>${evenement.nom}</td>
                           <td><fmt:formatDate value="${evenement.date}" pattern="dd/mm/yyyy" /></td>
-                          <td>${evenement.ville}</td>
+                          <td>${evenement.lieu}</td>
                           <td>${evenement.prix}</td>
                           <td>${evenement.categorie}</td>
                           <td><button type="submit" class="btn btn-default">Sélectionner</button></td>

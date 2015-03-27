@@ -1,9 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <jsp:include page="/header.jspf" />
-    <jsp:include page="/nav.jspf" />
-    <%@ include file="/messages.jspf" %>
+    <jsp:include page="/jspf/header.jspf" />
+    <%@ include file="/jspf/nav.jspf" %>
+    <%@ include file="/jspf/messages.jspf" %>
     <head>
         <title>Inscription</title>
     </head>

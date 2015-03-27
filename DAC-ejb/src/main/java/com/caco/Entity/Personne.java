@@ -121,8 +121,9 @@ public class Personne implements Serializable {
         return panier;
     }
     
-    public void ajouterAuPanier(Evenement e){
-        this.panier.addEvenement(e);
+    public Reservation ajouterAuPanier(Reservation r) throws RuptureDeStockException{
+        this.panier.addReservation(r);
+        return r;
     }
 
     @Override

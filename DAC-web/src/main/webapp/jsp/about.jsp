@@ -7,13 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <jsp:include page="/header.jspf" />
-    <jsp:include page="/nav.jspf" />
-    <%@ include file="/messages.jspf" %>
+    <jsp:include page="/jspf/header.jspf" />
+    <%@ include file="/jspf/nav.jspf" %>
+    <%@ include file="/jspf/messages.jspf" %>
     <head>
         <title>About Us</title>
     </head>
     <body>
+        <div class="col-md-4">
+            <%@ include file="/jspf/user.jspf" %>
+        </div>
         <div class="container">
             <div class="row">
                 <h1>A bunch of geek :</h1>

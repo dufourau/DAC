@@ -51,7 +51,8 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
                     (Date) formatter.parse(((String)evenement.get("date"))), 
                     (String) evenement.get("ville"),
                     (double) evenement.get("prix"),
-                    Categorie.fromString((String) evenement.get("categorie"))
+                    Categorie.fromString((String) evenement.get("categorie")),
+                    (int) evenement.get("quantite")
             );
         } catch (java.lang.ClassCastException e){
             LOGGER.error("Error while loading Evenement : "
@@ -62,8 +63,8 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
     }
 
     @Override
-    public void createFromParam(String nom, Date date, String ville, double prix, Categorie categorie) {
-        Evenement e = new Evenement(nom, date, ville, prix, categorie);
+    public void createFromParam(String nom, Date date, String lieu, double prix, Categorie categorie, int quantiteInitiale) {
+        Evenement e = new Evenement(nom, date, lieu, prix, categorie, quantiteInitiale);
         create(e);
     }
 
@@ -78,7 +79,7 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
     public List<Evenement> findEvents(String nom, Date date, String ville, double prixMin, double prixMax, String categorie) {
         String request = "SELECT events FROM Evenement AS events "
                 + "where LOWER(events.nom) like LOWER(:nom) AND "
-                + "LOWER(events.ville) like LOWER(:ville) AND "
+                + "LOWER(events.lieu) like LOWER(:ville) AND "
                 + "events.prix >= :prixMin AND events.prix <= :prixMax AND "
                 + "events.date >= :date";
         

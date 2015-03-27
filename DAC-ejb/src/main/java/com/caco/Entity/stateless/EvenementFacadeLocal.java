@@ -37,7 +37,7 @@ public interface EvenementFacadeLocal {
 
     void createFromMap(Map<String, Object> evenement);
     
-    void createFromParam(String Nom, Date Date, String Ville, double Prix, Categorie categorie);
+    void createFromParam(String Nom, Date Date, String Ville, double Prix, Categorie categorie, int quantiteInitiale);
         
     void removeAll();
 }

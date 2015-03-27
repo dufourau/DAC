@@ -114,9 +114,9 @@ public class Inscription extends HttpServlet {
         if (success){
             personneFacade.createFromParam(email, prenom, nom, password, age, adresse);
             LOGGER.info("Created user : " + email);
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
         } else {
-            getServletContext().getRequestDispatcher("/subscribe.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/jsp/subscribe.jsp").forward(request, response);
         }
         
     }

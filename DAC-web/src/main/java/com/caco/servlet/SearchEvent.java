@@ -92,7 +92,7 @@ public class SearchEvent extends HttpServlet {
             
             //Redirection sur la bonne page
             request.setAttribute("evenements", evenements);
-            getServletContext().getRequestDispatcher("/vue.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/jsp/resultatRecherche.jsp").forward(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(SearchEvent.class.getName()).log(Level.SEVERE, null, ex);
         }

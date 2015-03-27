@@ -7,10 +7,11 @@ package com.caco.servlet;
 
 import com.caco.Entity.Evenement;
 import com.caco.Entity.Personne;
+import com.caco.Entity.Reservation;
+import com.caco.Entity.RuptureDeStockException;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -54,7 +55,11 @@ public class AjouterPanier extends HttpServlet {
         List<String> infos = new ArrayList<>();
                 
         String idInput = request.getParameter("id");
+        String numberOfTicketsInput = request.getParameter("number");
         
+        boolean failed = false;
+        
+        int numberOfTickets = 0;
         Evenement evenement = null;
         
         long id;
@@ -62,25 +67,43 @@ public class AjouterPanier extends HttpServlet {
             id = Long.valueOf(idInput);
             evenement = evenementFacade.find(id);
         } catch (NumberFormatException e) {
+            failed = true;
             errors.add("Cet évènement n'existe pas.");
-            LOGGER.info("Bad input for DetailsEvent, id : \" " + idInput
-                    + "\" is not in a valid number format");
-            response.sendRedirect("./");
             return;
         }
+        
+        try {
+            numberOfTickets = Integer.valueOf(numberOfTicketsInput);
+        } catch (NumberFormatException e) {
+            failed = true;
+            errors.add("Nombre de ticket invalide.");
+        }
+        
+
         
         HttpSession session = request.getSession();
 
         if (session.getAttribute("user") == null){
+            failed = true;
             errors.add("Vous devez être connecté pour pouvoir ajouter un "
                     + "élément à votre panier");
+        }
+        
+        if (failed){
             request.setAttribute("errors", errors);
             getServletContext().getRequestDispatcher("/Index").forward(request, response);
             return;
         }
         
         Personne currentUser = (Personne) session.getAttribute("user");
-        currentUser.ajouterAuPanier(evenement);
+        try {
+            Reservation r = currentUser.ajouterAuPanier(new Reservation(evenement, numberOfTickets));
+        } catch (RuptureDeStockException e) {
+            errors.add("Désolé, il ne reste plus " + e.getQuantiteDemandee() + " places disponibles");
+            request.setAttribute("errors", errors);
+            getServletContext().getRequestDispatcher("/Index").forward(request, response);
+            return;
+        }
         
         personneFacade.edit(currentUser);
         
@@ -89,7 +112,7 @@ public class AjouterPanier extends HttpServlet {
         
         request.setAttribute("infos", infos);
         
-        getServletContext().getRequestDispatcher("/Index").forward(request, response);
+        getServletContext().getRequestDispatcher("/Panier").forward(request, response);
         
     }
 

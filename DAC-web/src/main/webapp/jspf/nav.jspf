@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -8,6 +10,11 @@
                 <li>
                     <a href="Index">Evenement</a>
                 </li>
+                <c:if test="${sessionScope.user ne null}">
+                    <li>
+                        <a href="Panier">Mon Panier</a>
+                    </li>
+                </c:if>
                 <li>
                     <a href="About">A propos</a>
                 </li>
