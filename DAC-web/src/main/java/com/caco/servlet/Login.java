@@ -49,15 +49,14 @@ public class Login extends HttpServlet {
         if (user == null){
             errors.add("Nom d'utilisateur ou mot de passe incorrect");
             request.setAttribute("errors", errors);
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             infos.add("Connexion réussie");
             request.setAttribute("infos", infos);
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("./");
         }
         
+        getServletContext().getRequestDispatcher("/Index").forward(request, response);
        
     }
 

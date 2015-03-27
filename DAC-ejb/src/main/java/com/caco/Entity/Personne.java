@@ -117,6 +117,14 @@ public class Personne implements Serializable {
         this.id = id;
     }
 
+    public Panier getPanier() {
+        return panier;
+    }
+    
+    public void ajouterAuPanier(Evenement e){
+        this.panier.addEvenement(e);
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

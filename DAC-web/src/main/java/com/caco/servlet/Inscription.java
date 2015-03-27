@@ -119,7 +119,6 @@ public class Inscription extends HttpServlet {
             getServletContext().getRequestDispatcher("/subscribe.jsp").forward(request, response);
         }
         
-
     }
 
     /**

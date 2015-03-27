@@ -8,7 +8,6 @@ package com.caco.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,12 +26,12 @@ public class Panier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+    @OneToMany
     private List<Evenement> evenenements = new ArrayList<>();;
     private double valeur;
 
     public Panier() {
-        this.valeur = valeur;
+        this.valeur = 0;
         this.evenenements = new ArrayList<Evenement>();
     }
 
@@ -42,16 +41,17 @@ public class Panier implements Serializable {
         this.valeur = valeur;
     }
 
-    public List<Evenement> getEvenenements() {
+    public void addEvenement(Evenement e){
+        this.valeur += e.getPrix();
+        this.evenenements.add(e);
+    }
+    
+    public List<Evenement> getEvenements() {
         return evenenements;
     }
 
     public double getValeur() {
-        double somme = 0;
-        for (Evenement e : evenenements){
-            somme += e.getPrix();
-        }
-        return somme;
+        return valeur;
     }
 
     @Override

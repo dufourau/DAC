@@ -27,6 +27,11 @@
         <servlet-class>com.caco.servlet.Logout</servlet-class>
     </servlet>
     
+    <servlet>
+        <servlet-name>AjouterPanier</servlet-name>
+        <servlet-class>com.caco.servlet.AjouterPanier</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -45,6 +50,11 @@
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/Index</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>AjouterPanier</servlet-name>
+        <url-pattern>/AjouterPanier</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

@@ -43,6 +43,14 @@
                 <td>${evenement.prix}</td>                
             </tr>
         </table>
+        <form class="form-horizontal" action="AjouterPanier" method="get">
+            <input type="hidden" name="id" value="${evenement.id}"/>
+            <div class="form-group">
+               <div class="col-sm-offset-2 col-sm-2">
+                 <button type="submit" class="btn btn-default">Ajouter au panier</button>
+               </div>
+            </div>
+        </form>
         </div>
     </div>
     </body>
