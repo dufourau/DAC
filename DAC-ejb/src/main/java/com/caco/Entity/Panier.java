@@ -50,6 +50,18 @@ public class Panier implements Serializable {
         this.reservations.add(reservation);
     }
     
+    public void removeReservation(Reservation reservation) throws PasPresenteException{
+        for (Reservation r : this.reservations){
+            if (r.getEvenement().getId().equals(reservation.getEvenement().getId())){
+                r.retirerTicket();
+                this.reservations.remove(r);
+                return;
+            }
+        }
+        throw new PasPresenteException(reservation.getEvenement());
+           
+    }
+    
     public List<Reservation> getReservations() {
         return reservations;
     }

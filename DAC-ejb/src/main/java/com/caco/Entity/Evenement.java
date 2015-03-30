@@ -138,4 +138,11 @@ public class Evenement implements Serializable {
         }
     }
     
+    public int enleverTickets(int numberOfTickets) {     
+        this.quantiteDisponible = this.quantiteDisponible + numberOfTickets;
+        return this.quantiteDisponible;  
+    }
+    
+    
+    
 }

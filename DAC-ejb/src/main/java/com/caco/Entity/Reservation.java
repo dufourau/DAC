@@ -60,4 +60,10 @@ public class Reservation implements Serializable {
     void reserverTicket() throws RuptureDeStockException {
         this.evenement.reserverTickets(this.getNumberOfTickets());
     }
+    
+    public void retirerTicket(){
+        this.numberOfTickets = 0;
+        this.evenement.enleverTickets(numberOfTickets);
+    }
+    
 }
