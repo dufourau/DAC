@@ -10,7 +10,7 @@
     <%@ include file="/jspf/nav.jspf" %>
     <%@ include file="/jspf/messages.jspf" %>
     <head>
-        <title>E-Caco</title>
+        <title>Votre Panier</title>
     </head>
     <body>
     

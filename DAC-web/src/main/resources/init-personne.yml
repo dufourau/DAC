@@ -1,4 +1,12 @@
 ---
+email: admin@ecaco.fr
+password: monique
+admin: true
+prenom: ""
+nom: ""
+age: 0
+adresse: ""
+---
 email: bob@caco.fr
 prenom: Bob
 nom: Caco

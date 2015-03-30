@@ -28,6 +28,11 @@
     </servlet>
     
     <servlet>
+        <servlet-name>Admin</servlet-name>
+        <jsp-file>jsp/admin.jsp</jsp-file>
+    </servlet>
+    
+    <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>com.caco.servlet.Logout</servlet-class>
     </servlet>
@@ -70,6 +75,12 @@
     <servlet-mapping>
         <servlet-name>Panier</servlet-name>
         <url-pattern>/Panier</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/Admin</url-pattern>
     </servlet-mapping>
     
     <session-config>

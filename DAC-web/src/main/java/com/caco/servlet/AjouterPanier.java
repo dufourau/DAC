@@ -79,7 +79,11 @@ public class AjouterPanier extends HttpServlet {
             errors.add("Nombre de ticket invalide.");
         }
         
-
+        
+        if (numberOfTickets == 0){
+            failed = true;
+            errors.add("Vous devez réserver au moins 1 ticket.");
+        }
         
         HttpSession session = request.getSession();
 

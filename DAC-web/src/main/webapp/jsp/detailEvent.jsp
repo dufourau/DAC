@@ -48,7 +48,7 @@
             <div class="form-group">
                <div class="col-sm-offset-2 col-sm-2">
                    <label for="number">Nombre de tickets</label>
-                   <input id="number" name="number" type="number" value="0" min="0"/>
+                   <input id="number" name="number" type="number" value="1" min="1"/>
                </div>
             </div>
             <div class="form-group">

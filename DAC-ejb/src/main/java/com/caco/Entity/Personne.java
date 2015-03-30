@@ -31,6 +31,7 @@ public class Personne implements Serializable {
     private String password;
     private int age;
     private String adresse;
+    private boolean admin;
     @OneToOne(cascade = CascadeType.ALL)
     private Panier panier;
 
@@ -42,6 +43,7 @@ public class Personne implements Serializable {
         this.age = age;
         this.adresse = adresse;
         this.panier = new Panier();
+        this.admin = false;
     }
 
     public Personne() {
@@ -119,6 +121,14 @@ public class Personne implements Serializable {
 
     public Panier getPanier() {
         return panier;
+    }
+    
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
     
     public Reservation ajouterAuPanier(Reservation r) throws RuptureDeStockException{

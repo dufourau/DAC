@@ -47,17 +47,25 @@ public class PersonneFacade extends AbstractFacade<Personne> implements Personne
         Personne p = new Personne(email,prenom,nom,password, age,adresse);
         create(p);
     }
-        
+    
+    private static String emptyIfNull(String a){
+        if (a == null) return ""; else return a;
+    }
+    
     @Override
     public void createFromMap(Map<String, Object> personne){
-        createFromParam(
-                (String) personne.get("email"),
-                (String) personne.get("prenom"), 
-                (String) personne.get("nom"),
-                (String) personne.get("password"),
-                (int) personne.get("age"),
-                (String) personne.get("adresse")
+        Personne p =  new Personne(
+                emptyIfNull((String) personne.get("email")),
+                emptyIfNull((String) personne.get("prenom")),
+                emptyIfNull((String) personne.get("nom")),
+                emptyIfNull((String) personne.get("password")),
+                personne.get("age")==null ? 0 : ((int) personne.get("age")),
+                emptyIfNull((String) personne.get("adresse"))
         );
+        if (personne.get("admin") != null && (boolean) personne.get("admin")){
+            p.setAdmin(true);
+        }
+        create(p);
     }
 
     @Override

@@ -14,6 +14,11 @@
                     <li>
                         <a href="Panier">Mon Panier</a>
                     </li>
+                    <c:if test="${sessionScope.user.isAdmin()}">
+                        <li>
+                            <a href="Admin">Panel administrateur</a>
+                        </li>
+                    </c:if>
                 </c:if>
                 <li>
                     <a href="About">A propos</a>

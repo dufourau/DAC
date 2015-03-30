@@ -5,6 +5,7 @@
  */
 package com.caco;
 
+import com.caco.Entity.Personne;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletContextEvent;
