@@ -155,7 +155,12 @@ public class Personne implements Serializable {
         }
         return true;
     }
-
+    
+    public Reservation retirerDuPanier(Reservation r) throws PasPresenteException{
+        this.panier.removeReservation(r);
+        return r;
+    }
+      
     @Override
     public String toString() {
         return "com.caco.Entity.Personne[ id=" + id + "\nemail=" + email + " ]";
