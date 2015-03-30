@@ -23,6 +23,11 @@
     </servlet>
     
     <servlet>
+        <servlet-name>Payment</servlet-name>
+        <jsp-file>jsp/payment.jsp</jsp-file>
+    </servlet>
+    
+    <servlet>
         <servlet-name>Panier</servlet-name>
         <jsp-file>jsp/panier.jsp</jsp-file>
     </servlet>
@@ -80,6 +85,11 @@
     <servlet-mapping>
         <servlet-name>About</servlet-name>
         <url-pattern>/About</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Payment</servlet-name>
+        <url-pattern>/Payment</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

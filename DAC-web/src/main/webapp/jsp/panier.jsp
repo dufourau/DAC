@@ -38,6 +38,7 @@
                                             <p>Lieu: ${reservation.getEvenement().getLieu()}</p>
                                             <p>Date ${reservation.getEvenement().getDate()}</p>
                                             <p>Categorie: ${reservation.getEvenement().getCategorie()}</p>
+                                            <p>Prix: ${reservation.getEvenement().getPrix()}</p>
                                         </div>
                                         <form action="DetailsEvent" method="get">
                                             <input type="hidden" name="id" value="${reservation.getEvenement().getId()}">
@@ -50,9 +51,17 @@
                                         </form>
                                     </div>                    
                               </c:forEach>
+                            <div class="row">  
+                                <label for="total">Total</label>
+                                <input class="form-control" id="total" name="id" value="${sessionScope.user.getPanier().getValeur()}" readonly="true">                           
+                                <a href="Payment" type="submit" class="btn btn-default">Payer</a>                         
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                    
+                
             </c:otherwise>
         </c:choose>     
     </div>
