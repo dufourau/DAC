@@ -43,6 +43,7 @@ public class Admin extends HttpServlet {
     @EJB
     private EvenementFacadeLocal evenementFacade;
     
+    @EJB
     private PanierFacadeLocal panierFacade;
     
     @EJB
@@ -209,23 +210,16 @@ public class Admin extends HttpServlet {
             errors.add("Veuillez renseigner un titre.");
             success = false;
         }
-        
-        try {
-            panierFacade = (PanierFacadeLocal) new InitialContext().lookup("java:app/ejb/PanierFacade");
-        } catch (NamingException ex) {
-            errors.add("Erreur interne au serveur.");
-            success = false;
-        }
-        
+
         if (success){
             List<Evenement>  events = evenementFacade.findEvents(titre);
             for (Evenement e : events){
                 for (Reservation r : e.getReservations()){
                     try {
                         r.getPanier().removeReservation(r);
+                        panierFacade.edit(r.getPanier());
                     } catch (PasPresenteException ex) {
                     }
-                    panierFacade.edit(r.getPanier());
                 }
             }
             evenementFacade.remove(titre);

@@ -63,7 +63,7 @@ public class SearchEvent extends HttpServlet {
         
         try {  
             String PRICE_MATCHER = "\\d+\\.\\d";
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+            SimpleDateFormat formatter = new SimpleDateFormat(Validation.DATE_FORMAT);
             
             //Récupération des paramètres et formatage des données
             String nom = request.getParameter("nom");
@@ -81,7 +81,7 @@ public class SearchEvent extends HttpServlet {
                 date = formatter.parse(request.getParameter("date")); 
             }
             else{
-                date = formatter.parse("01/01/1970");
+                date = formatter.parse("1970-01-01");
             }
             
             if(!prixMin.equals("") && isPrixMin){

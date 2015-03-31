@@ -94,17 +94,16 @@ public class RetirerPanier extends HttpServlet {
         }
         
         try {
-            Reservation r = currentUser.retirerDuPanier(reservation);
+            currentUser.retirerDuPanier(reservation);
         } catch (PasPresenteException e) {
             errors.add("Désolé, " + e.getEvenement().getNom() + " n'est pas présente dans votre panier");
             request.setAttribute("errors", errors);
             getServletContext().getRequestDispatcher("/Index").forward(request, response);
             return;
         }
-        
+        System.out.println(reservation.getEvenement());
         personneFacade.edit(currentUser);
         evenementFacade.edit(reservation.getEvenement());
-        
         
         infos.add("La réservation de l'évenement " + reservation.getEvenement().getNom() + " a bien été retiré de "
                 + "vote panier");

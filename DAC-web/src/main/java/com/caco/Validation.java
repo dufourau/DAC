@@ -21,7 +21,7 @@ public class Validation {
     public static final String PASSWORD_PATTERN = ".*[A-Z].*";
     
     public static String DATE_FORMAT = "yyyy-mm-dd";
-    
+        
     public static boolean isDateValid(String date) 
     {
         try {
