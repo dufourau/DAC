@@ -43,6 +43,7 @@ public class Admin extends HttpServlet {
     @EJB
     private EvenementFacadeLocal evenementFacade;
     
+    @EJB
     private PanierFacadeLocal panierFacade;
     
     @EJB
@@ -210,12 +211,14 @@ public class Admin extends HttpServlet {
             success = false;
         }
         
+        /*
         try {
             panierFacade = (PanierFacadeLocal) new InitialContext().lookup("java:app/ejb/PanierFacade");
         } catch (NamingException ex) {
             errors.add("Erreur interne au serveur.");
             success = false;
         }
+        */
         
         if (success){
             List<Evenement>  events = evenementFacade.findEvents(titre);

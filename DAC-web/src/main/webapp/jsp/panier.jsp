@@ -52,13 +52,13 @@
                                      <!--Add a remove event servlet-->
                                      <form action="RetirerPanier" method="get">
                                          <input type="hidden" name="id" value="${reservation.getId()}">
-                                        <button type="submit" class="btn btn-default">Retirer</button>
+                                         <button type="submit" class="btn btn-default">Retirer</button>
                                     </form>
                               </c:forEach>
                             <div class="row">  
                                 <label for="total">Total</label>
                                 <input class="form-control" id="total" name="id" value="${sessionScope.user.getPanier().getValeur()}" readonly="true">                           
-                                <a href="Payment" type="submit" class="btn btn-default">Payer</a>                         
+                                <a href="Payment" class="btn btn-default">Payer</a>                         
                             </div>
                         </div>
                     </div>
