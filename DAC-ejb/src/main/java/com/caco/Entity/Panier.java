@@ -54,10 +54,10 @@ public class Panier implements Serializable {
     }
     
     public void removeReservation(Reservation reservation) throws PasPresenteException{
+        reservation.annuler();
         for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
             Reservation r = iterator.next();
             if (r.getId().equals(reservation.getId())){
-                r.annuler();
                 iterator.remove();
                 return;
             }

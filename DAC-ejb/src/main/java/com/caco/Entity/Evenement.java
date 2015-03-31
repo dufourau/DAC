@@ -91,9 +91,9 @@ public class Evenement implements Serializable {
 
     @Override
     public String toString() {
-        return "com.caco.Entity.Evenement[ id=" + id + " ]";
+        return "Evenement{" + "id=" + id + ", date=" + date + ", nom=" + nom + ", lieu=" + lieu + ", prix=" + prix + ", quantiteDisponible=" + quantiteDisponible + ", reservations=" + reservations + ", categorie=" + categorie + '}';
     }
-
+    
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -159,7 +159,7 @@ public class Evenement implements Serializable {
         for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
             Reservation next = iterator.next();
             if (next.getId().equals(r.getId())){
-                this.quantiteDisponible = this.quantiteDisponible + r.getNumberOfTickets();
+                this.quantiteDisponible = this.quantiteDisponible + next.getNumberOfTickets();
                 iterator.remove();
                 return this.quantiteDisponible;
             }
