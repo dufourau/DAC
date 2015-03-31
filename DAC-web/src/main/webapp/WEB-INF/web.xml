@@ -33,6 +33,12 @@
         <servlet-name>AjouterPanier</servlet-name>
         <servlet-class>com.caco.servlet.AjouterPanier</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>RetirerPanier</servlet-name>
+        <servlet-class>com.caco.servlet.RetirerPanier</servlet-class>
+    </servlet>
+    
     <servlet>
         <servlet-name>Admin</servlet-name>
         <servlet-class>com.caco.servlet.Admin</servlet-class>
@@ -61,6 +67,11 @@
         <servlet-name>AjouterPanier</servlet-name>
         <url-pattern>/AjouterPanier</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RetirerPanier</servlet-name>
+        <url-pattern>/RetirerPanier</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>About</servlet-name>
         <url-pattern>/About</url-pattern>

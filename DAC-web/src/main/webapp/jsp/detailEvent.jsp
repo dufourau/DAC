@@ -28,21 +28,17 @@
     <div class="container">
 
         <div class="row">
-        Je suis sur la page de détails d'évenement
-        <table>
-            <tr>
-                <td>${evenement.nom}</td>
-            </tr>   
-            <tr>
-                <td>${evenement.date}</td>
-            </tr>   
-            <tr>
-                <td>${evenement.lieu}</td>
-            </tr>   
-            <tr>
-                <td>${evenement.prix}</td>                
-            </tr>
-        </table>
+         <div class="panel event">
+                <div class="panel-heading">
+                    ${evenement.nom}
+                </div>
+                <div class="panel-body">
+                    <p>Lieu: ${evenement.lieu}</p>
+                    <p>Date: ${evenement.date}</p>
+                    <p>Prix: ${evenement.prix}</p>
+                    <p>Categorie: ${reservation.getEvenement().getCategorie()}</p>
+                </div>          
+        </div> 
         <form class="form-horizontal" action="AjouterPanier" method="get">
             <input type="hidden" name="id" value="${evenement.id}"/>
             <div class="form-group">

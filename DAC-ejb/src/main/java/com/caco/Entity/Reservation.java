@@ -75,7 +75,8 @@ public class Reservation implements Serializable {
         this.evenement.reserverTickets(this.getNumberOfTickets());
     }
     
-    void annuler() {
-        this.evenement.annulerTickets(this.getNumberOfTickets());
+    public void retirerTicket(){
+        this.numberOfTickets = 0;
+        this.evenement.enleverTickets(numberOfTickets);
     }
 }

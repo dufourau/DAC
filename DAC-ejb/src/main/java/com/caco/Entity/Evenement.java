@@ -147,9 +147,9 @@ public class Evenement implements Serializable {
         }
     }
     
-    public int annulerTickets(int numberOfTickets) {
-        this.quantiteDisponible += numberOfTickets;
-        return this.quantiteDisponible;
+    public int enleverTickets(int numberOfTickets) {     
+        this.quantiteDisponible = this.quantiteDisponible + numberOfTickets;
+        return this.quantiteDisponible;  
     }
     
 }
