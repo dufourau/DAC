@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <display-name>E-Caco</display-name>
-    
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.caco.servlet.Login</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>SearchEvent</servlet-name>
         <servlet-class>com.caco.servlet.SearchEvent</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>Index</servlet-name>
         <servlet-class>com.caco.servlet.Index</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>Inscription</servlet-name>
+        <servlet-class>com.caco.servlet.Inscription</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>About</servlet-name>
         <jsp-file>jsp/about.jsp</jsp-file>
     </servlet>
-    
     <servlet>
         <servlet-name>Payment</servlet-name>
         <jsp-file>jsp/payment.jsp</jsp-file>
@@ -29,19 +28,12 @@
     
     <servlet>
         <servlet-name>Panier</servlet-name>
-        <jsp-file>jsp/panier.jsp</jsp-file>
+        <servlet-class>com.caco.servlet.Panier</servlet-class>
     </servlet>
-    
-    <servlet>
-        <servlet-name>Admin</servlet-name>
-        <jsp-file>jsp/admin.jsp</jsp-file>
-    </servlet>
-    
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>com.caco.servlet.Logout</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>AjouterPanier</servlet-name>
         <servlet-class>com.caco.servlet.AjouterPanier</servlet-class>
@@ -52,31 +44,34 @@
         <servlet-class>com.caco.servlet.RetirerPanier</servlet-class>
     </servlet>
     
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>com.caco.servlet.Admin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>SearchEvent</servlet-name>
         <url-pattern>/SearchEvent</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/Index</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>Inscription</servlet-name>
+        <url-pattern>/Inscription</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AjouterPanier</servlet-name>
         <url-pattern>/AjouterPanier</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>RetirerPanier</servlet-name>
         <url-pattern>/RetirerPanier</url-pattern>
@@ -86,7 +81,6 @@
         <servlet-name>About</servlet-name>
         <url-pattern>/About</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>Payment</servlet-name>
         <url-pattern>/Payment</url-pattern>
@@ -96,21 +90,16 @@
         <servlet-name>Panier</servlet-name>
         <url-pattern>/Panier</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>/Admin</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-    
     <welcome-file-list>
-        <welcome-file>Index</welcome-file> 
+        <welcome-file>Index</welcome-file>
     </welcome-file-list>
-        
     <resource-ref>
         <description>Connects to database for Ecaco application</description>
         <res-ref-name>jdbc/__dac</res-ref-name>
@@ -118,7 +107,6 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-    
     <listener>
         <listener-class>
             com.caco.Init

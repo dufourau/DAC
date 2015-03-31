@@ -40,4 +40,6 @@ public interface EvenementFacadeLocal {
     void createFromParam(String Nom, Date Date, String Ville, double Prix, Categorie categorie, int quantiteInitiale);
         
     void removeAll();
+    
+    void remove(String title);
 }

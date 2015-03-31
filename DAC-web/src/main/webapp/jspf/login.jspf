@@ -3,13 +3,13 @@
      <div class="form-group">
          <label for="inputEmail" class="col-sm-4 control-label">Email</label>
          <div class="col-sm-6">
-           <input type="email" class="form-control" name="email" placeholder="Email">
+           <input type="email" class="form-control" name="email" placeholder="Email" required>
          </div>
       </div>
       <div class="form-group">
          <label for="inputPassword" class="col-sm-4 control-label">Mot de passe</label>
          <div class="col-sm-6">
-           <input type="password" class="form-control" name="password" placeholder="Mot de passe">
+           <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
          </div>
       </div>
       <div class="form-group">

@@ -6,13 +6,18 @@
 package com.caco.Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +44,9 @@ public class Evenement implements Serializable {
     
     @Enumerated(EnumType.STRING)
     private Categorie categorie;
+    
+    @OneToMany(mappedBy = "evenement", cascade = CascadeType.REMOVE)
+    private List<Reservation> reservations;
 
     public Evenement() {
     }
@@ -50,6 +58,7 @@ public class Evenement implements Serializable {
         this.prix = prix;
         this.categorie = categorie;
         this.quantiteDisponible = quantiteInitiale;
+        this.reservations = new ArrayList<>();
     }
     
     public Long getId() {
@@ -142,7 +151,5 @@ public class Evenement implements Serializable {
         this.quantiteDisponible = this.quantiteDisponible + numberOfTickets;
         return this.quantiteDisponible;  
     }
-    
-    
     
 }

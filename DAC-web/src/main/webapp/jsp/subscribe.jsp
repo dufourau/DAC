@@ -15,19 +15,19 @@
                     <div class="form-group">
                         <label for="inputEmail" class="col-sm-2 control-label"><span style="color:red">* </span>Email</label>
                         <div class="col-sm-6">
-                          <input name="email" class="form-control" placeholder="Email">
+                          <input name="email" class="form-control" placeholder="Email" required>
                         </div>
                      </div>
                      <div class="form-group">
                         <label for="inputPassword" class="col-sm-2 control-label"><span style="color:red">* </span>Mot de passe</label>
                         <div class="col-sm-6">
-                          <input type="password" name="password" class="form-control" placeholder="Mot de passe">
+                          <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
                         </div>
                      </div>
                      <div class="form-group">
                         <label for="inputPassword2" class="col-sm-2 control-label"><span style="color:red">* </span>Confirmer le mot de passe</label>
                         <div class="col-sm-6">
-                          <input type="password" name="password2" class="form-control" placeholder="Mot de passe">
+                          <input type="password" name="password2" class="form-control" placeholder="Mot de passe" required>
                         </div>
                      </div>
                      <div class="form-group">
@@ -57,7 +57,7 @@
                        
                      <div class="form-group">
                         <div class="col-sm-offset-2 input-group">
-                            <input type="checkbox" aria-label="...">
+                            <input type="checkbox" name="conditonGenerales">
                             <span style="color:red">  * </span>J'ai lu et j'accepte les conditions générales d'utilisation.</br>
                             </br>
                         </div><!-- /input-group -->

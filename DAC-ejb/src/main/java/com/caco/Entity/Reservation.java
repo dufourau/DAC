@@ -6,6 +6,7 @@
 package com.caco.Entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -23,14 +26,20 @@ import javax.persistence.Table;
 @Table(name="Reservation")
 public class Reservation implements Serializable {
     
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    // Expiration time in seconds : 15 minutes
+    private static int timeOut = 15*60000;
+    
     @ManyToOne(cascade = CascadeType.MERGE, optional = false)
     private Evenement evenement;
     private int numberOfTickets;
+    @Temporal(TemporalType.DATE)
+    private Date expirationDate;
     
     public Reservation() {
     }
@@ -38,6 +47,7 @@ public class Reservation implements Serializable {
     public Reservation(Evenement evenement, int numberOfTickets){
         this.evenement = evenement;
         this.numberOfTickets = numberOfTickets;
+        this.expirationDate = new Date( (new Date().getTime()) + timeOut);
     }
     
     public Evenement getEvenement(){
@@ -50,6 +60,10 @@ public class Reservation implements Serializable {
     
     public double getPrix(){
         return numberOfTickets*this.evenement.getPrix();
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
     }
     
     public void ajouterTicket(int numberOfTickets) throws RuptureDeStockException{
@@ -65,5 +79,4 @@ public class Reservation implements Serializable {
         this.numberOfTickets = 0;
         this.evenement.enleverTickets(numberOfTickets);
     }
-    
 }

@@ -1,3 +1,7 @@
+<%@page import="com.caco.Entity.stateless.PersonneFacadeLocal"%>
+<%@page import="com.caco.Entity.stateless.PersonneFacade"%>
+<%@page import="javax.ejb.EJB"%>
+<%@page import="com.caco.Entity.Personne"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -40,15 +44,6 @@
                                             <p>Categorie: ${reservation.getEvenement().getCategorie()}</p>
                                             <p>Prix: ${reservation.getEvenement().getPrix()}</p>
                                         </div>
-                                        <form action="DetailsEvent" method="get">
-                                            <input type="hidden" name="id" value="${reservation.getEvenement().getId()}">
-                                            <button type="submit" class="btn btn-default">Selectionner</button>
-                                         </form>
-                                         <!--Add a remove event servlet-->
-                                         <form action="RetirerPanier" method="get">
-                                             <input type="hidden" name="id" value="${reservation.getEvenement().getId()}">
-                                            <button type="submit" class="btn btn-default">Retirer</button>
-                                        </form>
                                     </div>                    
                               </c:forEach>
                             <div class="row">  

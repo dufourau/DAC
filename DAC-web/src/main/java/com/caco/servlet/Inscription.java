@@ -5,6 +5,7 @@
  */
 package com.caco.servlet;
 
+import com.caco.Entity.Personne;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
 import com.caco.Init;
 import com.caco.Validation;
@@ -45,7 +46,7 @@ public class Inscription extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
        
-        getServletContext().getRequestDispatcher("/subscribe.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/jsp/subscribe.jsp").forward(request, response);
     }
 
     /**
@@ -70,17 +71,23 @@ public class Inscription extends HttpServlet {
         String password2 = request.getParameter("password2");
         String prenom = request.getParameter("prenom");
         String nom = request.getParameter("nom");
+        String adresse = request.getParameter("adresse");
+        boolean conditionGenerales = false;
+        
+        if (request.getParameter("conditonGenerales") != null && request.getParameter("conditonGenerales").equals("on")){
+            conditionGenerales = true;
+        }
+        
         int age = 0;
         try {
             age = Integer.parseInt(request.getParameter("age"));
         } catch (NumberFormatException e){
             if (!request.getParameter("age").isEmpty()){
-                errors.add("Le mot de passe doit contenir au moins une majuscule");
+                errors.add("L'age a un format incorrect.");
                 success = false;
             }
         }
-        String adresse = request.getParameter("adresse");
-        
+
         if (!email.matches(Validation.EMAIL_PATTERN)){
             errors.add("Format d'adresse e-mail invalide");
             success = false;
@@ -100,22 +107,32 @@ public class Inscription extends HttpServlet {
             errors.add("Les mots de passes ne coïncident pas");
             success = false;
         }
-       
-        if (success) {
-            infos.add("Inscription réussie");
+        
+        if (!conditionGenerales){
+            errors.add("Veuillez accepter les conditions générales.");
+            success = false;
         }
-
+        
+        if (success){
+            Personne p = personneFacade.find(email);
+            if (p != null){
+                errors.add("Cette adresse e-mail est déjà utilisée.");
+                success = false;
+            } else {
+                personneFacade.createFromParam(email, prenom, nom, password, age, adresse);
+                LOGGER.info("Created user : " + email);
+                infos.add("Inscription réussie");
+            }
+        }
+        
         if (errors.isEmpty()) errors = null;
         if (infos.isEmpty()) infos = null;
         
-        request.setAttribute("errors", errors);
-        request.setAttribute("infos", infos);
-        
         if (success){
-            personneFacade.createFromParam(email, prenom, nom, password, age, adresse);
-            LOGGER.info("Created user : " + email);
+            request.setAttribute("infos", infos);
             getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
         } else {
+            request.setAttribute("errors", errors);
             getServletContext().getRequestDispatcher("/jsp/subscribe.jsp").forward(request, response);
         }
         

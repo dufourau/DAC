@@ -7,6 +7,8 @@ package com.caco.Entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -72,6 +74,17 @@ public class Panier implements Serializable {
             valeur += r.getPrix();
         }
         return valeur;
+    }
+    
+    public void update(){
+        Date now = new Date();
+        for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
+            Reservation r = iterator.next();
+            if (now.after(r.getExpirationDate())){
+                r.annuler();
+                iterator.remove();
+            }
+        }
     }
 
     @Override

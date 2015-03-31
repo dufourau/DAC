@@ -7,6 +7,7 @@ package com.caco.servlet;
 
 import com.caco.Entity.Evenement;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
+import com.caco.Validation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -31,19 +32,7 @@ public class SearchEvent extends HttpServlet {
     
     @EJB    
     private EvenementFacadeLocal evenementFacade;
-    
-    public static boolean isDateValid(String date) 
-    {
-        String DATE_FORMAT = "dd/mm/yyyy";
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            df.setLenient(false);
-            df.parse(date);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
+
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +47,7 @@ public class SearchEvent extends HttpServlet {
             throws ServletException, IOException {
         try {  
             String PRICE_MATCHER = "\\d+\\.\\d";
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             
             //Récupération des paramètres et formatage des données
             String nom = request.getParameter("nom");
@@ -72,7 +61,7 @@ public class SearchEvent extends HttpServlet {
             boolean isPrixMin = prixMin.matches(PRICE_MATCHER);
             boolean isPrixMax = prixMax.matches(PRICE_MATCHER);
             
-            if(isDateValid(request.getParameter("date"))){
+            if(Validation.isDateValid(request.getParameter("date"))){
                 date = formatter.parse(request.getParameter("date")); 
             }
             else{
