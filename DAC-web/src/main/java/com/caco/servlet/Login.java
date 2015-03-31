@@ -9,7 +9,6 @@ import com.caco.Entity.Personne;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -50,6 +49,7 @@ public class Login extends HttpServlet {
             request.setAttribute("errors", errors);
         } else {
             HttpSession session = request.getSession();
+            session.setAttribute("username", user.getEmail());
             session.setAttribute("user", user);
         }
         

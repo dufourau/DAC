@@ -6,7 +6,9 @@
 package com.caco.servlet;
 
 import com.caco.Entity.Evenement;
+import com.caco.Entity.Personne;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
+import com.caco.Entity.stateless.PersonneFacadeLocal;
 import com.caco.Validation;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,6 +25,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,6 +36,8 @@ public class SearchEvent extends HttpServlet {
     @EJB    
     private EvenementFacadeLocal evenementFacade;
 
+    @EJB
+    private PersonneFacadeLocal personneFacade;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,6 +50,17 @@ public class SearchEvent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Personne user = null;
+        
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("username") != null){
+            user = personneFacade.find(session.getAttribute("username"));
+        }
+            
+        session.setAttribute("user",user);
+        
         try {  
             String PRICE_MATCHER = "\\d+\\.\\d";
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");

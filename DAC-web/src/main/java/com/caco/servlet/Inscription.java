@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,7 +45,15 @@ public class Inscription extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        Personne user = null;
+        
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("username") != null){
+            user = personneFacade.find(session.getAttribute("username"));
+        }
+            
+        session.setAttribute("user",user);
        
         getServletContext().getRequestDispatcher("/jsp/subscribe.jsp").forward(request, response);
     }

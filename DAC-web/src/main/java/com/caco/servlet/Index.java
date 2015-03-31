@@ -6,7 +6,9 @@
 package com.caco.servlet;
 
 import com.caco.Entity.Evenement;
+import com.caco.Entity.Personne;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
+import com.caco.Entity.stateless.PersonneFacadeLocal;
 import com.caco.Init;
 import java.io.IOException;
 import java.util.List;
@@ -15,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +31,9 @@ public class Index extends HttpServlet {
     
     @EJB
     private EvenementFacadeLocal evenementFacade;
-
+    
+    @EJB
+    private PersonneFacadeLocal personneFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,6 +48,17 @@ public class Index extends HttpServlet {
         List<Evenement> evenements = evenementFacade.findAll();
         
         request.setAttribute("evenements", evenements);
+        
+        Personne user = null;
+        
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("username") != null){
+            user = personneFacade.find(session.getAttribute("username"));
+        }
+            
+        session.setAttribute("user",user);
+        
         request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
     }
 

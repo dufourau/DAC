@@ -38,12 +38,19 @@ public class Panier extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Personne user = null;
+        
         HttpSession session = request.getSession();
         
-        if (session.getAttribute("user") != null){
-            Personne utilisateur = (Personne) session.getAttribute("user");
-            utilisateur.getPanier().update();
-            personneFacade.edit(utilisateur);
+        if (session.getAttribute("username") != null){
+            user = personneFacade.find(session.getAttribute("username"));
+        }
+            
+        session.setAttribute("user",user);
+        
+        if (user != null){
+            user.getPanier().update();
+            personneFacade.edit(user);
         }
         
         getServletContext().getRequestDispatcher("/jsp/panier.jsp").forward(request, response);

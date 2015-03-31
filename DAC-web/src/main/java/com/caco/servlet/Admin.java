@@ -6,7 +6,14 @@
 package com.caco.servlet;
 
 import com.caco.Entity.Categorie;
+import com.caco.Entity.Evenement;
+import com.caco.Entity.PasPresenteException;
+import com.caco.Entity.Personne;
+import com.caco.Entity.Reservation;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
+import com.caco.Entity.stateless.PanierFacade;
+import com.caco.Entity.stateless.PanierFacadeLocal;
+import com.caco.Entity.stateless.PersonneFacadeLocal;
 import com.caco.Init;
 import com.caco.Validation;
 import java.io.IOException;
@@ -15,11 +22,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,6 +42,12 @@ public class Admin extends HttpServlet {
 
     @EJB
     private EvenementFacadeLocal evenementFacade;
+    
+    private PanierFacadeLocal panierFacade;
+    
+    @EJB
+    private PersonneFacadeLocal personneFacade;
+
     
     private static final Logger LOGGER = LogManager.getLogger(Init.class);
 
@@ -45,6 +62,16 @@ public class Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Personne user = null;
+        
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("username") != null){
+            user = personneFacade.find(session.getAttribute("username"));
+        }
+            
+        session.setAttribute("user",user);
+        
         getServletContext().getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
     }
 
@@ -67,7 +94,7 @@ public class Admin extends HttpServlet {
             List<String> errors = new ArrayList<>();
             errors.add("Les paramètres de la requête sont invalides.");
             request.setAttribute("errors", errors);
-            getServletContext().getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+            doGet(request, response);
         }
     }
 
@@ -162,11 +189,10 @@ public class Admin extends HttpServlet {
         
         if (success){
             request.setAttribute("infos", infos);
-            getServletContext().getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
         } else {
             request.setAttribute("errors", errors);
-            getServletContext().getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
         }
+        doGet(request, response);
         
     }
     
@@ -184,7 +210,24 @@ public class Admin extends HttpServlet {
             success = false;
         }
         
+        try {
+            panierFacade = (PanierFacadeLocal) new InitialContext().lookup("java:app/ejb/PanierFacade");
+        } catch (NamingException ex) {
+            errors.add("Erreur interne au serveur.");
+            success = false;
+        }
+        
         if (success){
+            List<Evenement>  events = evenementFacade.findEvents(titre);
+            for (Evenement e : events){
+                for (Reservation r : e.getReservations()){
+                    try {
+                        r.getPanier().removeReservation(r);
+                    } catch (PasPresenteException ex) {
+                    }
+                    panierFacade.edit(r.getPanier());
+                }
+            }
             evenementFacade.remove(titre);
             infos.add("L'évenement " + titre + " a été supprimé.");
             LOGGER.info("Create new event " + titre);
@@ -195,11 +238,10 @@ public class Admin extends HttpServlet {
         
         if (success){
             request.setAttribute("infos", infos);
-            getServletContext().getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
         } else {
             request.setAttribute("errors", errors);
-            getServletContext().getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
         }
+        doGet(request, response);
     }
     /**
      * Returns a short description of the servlet.

@@ -6,9 +6,9 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <jsp:include page="/jspf/header.jspf" />
-    <%@ include file="/jspf/nav.jspf" %>
-    <%@ include file="/jspf/messages.jspf" %>
+    <%@include file="/jspf/header.jspf" %>
+    <%@include file="/jspf/nav.jspf" %>
+    <%@include file="/jspf/messages.jspf" %>
     <head>
         <title>E-Caco</title>
     </head>

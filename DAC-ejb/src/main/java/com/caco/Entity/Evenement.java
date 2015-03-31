@@ -8,6 +8,7 @@ package com.caco.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -41,12 +42,11 @@ public class Evenement implements Serializable {
     private String lieu;
     private double prix;
     private int quantiteDisponible;
+    @OneToMany(mappedBy = "evenement", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Reservation> reservations;
     
     @Enumerated(EnumType.STRING)
     private Categorie categorie;
-    
-    @OneToMany(mappedBy = "evenement", cascade = CascadeType.REMOVE)
-    private List<Reservation> reservations;
 
     public Evenement() {
     }
@@ -137,6 +137,14 @@ public class Evenement implements Serializable {
     public void setCategorie(Categorie Categorie){
         this.categorie = Categorie;
     }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
     
     public int reserverTickets(int numberOfTickets) throws RuptureDeStockException {
         if (this.quantiteDisponible < numberOfTickets) {
@@ -147,9 +155,19 @@ public class Evenement implements Serializable {
         }
     }
     
-    public int enleverTickets(int numberOfTickets) {     
-        this.quantiteDisponible = this.quantiteDisponible + numberOfTickets;
+    public int annuler(Reservation r) {     
+        for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
+            Reservation next = iterator.next();
+            if (next.getId().equals(r.getId())){
+                this.quantiteDisponible = this.quantiteDisponible + r.getNumberOfTickets();
+                iterator.remove();
+                return this.quantiteDisponible;
+            }
+        }
         return this.quantiteDisponible;  
     }
     
+    public void addReservation(Reservation r){
+        this.reservations.add(r);
+    }
 }

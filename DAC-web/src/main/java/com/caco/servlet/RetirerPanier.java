@@ -5,15 +5,13 @@
  */
 package com.caco.servlet;
 
-import com.caco.Entity.Evenement;
 import com.caco.Entity.PasPresenteException;
 import com.caco.Entity.Personne;
 import com.caco.Entity.Reservation;
-import com.caco.Entity.RuptureDeStockException;
 import com.caco.Entity.stateless.EvenementFacadeLocal;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
+import com.caco.Entity.stateless.ReservationFacadeLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -32,10 +30,13 @@ import javax.servlet.http.HttpSession;
 public class RetirerPanier extends HttpServlet {
     
     @EJB    
-    private EvenementFacadeLocal evenementFacade;
+    private ReservationFacadeLocal reservationFacade;
         
     @EJB
     private PersonneFacadeLocal personneFacade;
+    
+    @EJB    
+    private EvenementFacadeLocal evenementFacade;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,24 +57,34 @@ public class RetirerPanier extends HttpServlet {
         boolean failed = false;
         
         int numberOfTickets = 0;
-        Evenement evenement = null;
+        Reservation reservation = null;
         
-        long id;
-        try {
-            id = Long.valueOf(idInput);
-            evenement = evenementFacade.find(id);
-        } catch (NumberFormatException e) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") == null){
             failed = true;
-            errors.add("Cet évènement n'existe pas.");
+            errors.add("Vous devez être connecté pour pouvoir retirer une "
+                    + "réservation de votre panier");
+            request.setAttribute("errors", errors);
+        
+            getServletContext().getRequestDispatcher("/Panier").forward(request, response);
             return;
         }
         
-        HttpSession session = request.getSession();
-
-        if (session.getAttribute("user") == null){
+        Personne currentUser = null;
+       
+        if (session.getAttribute("username") != null){
+            currentUser = personneFacade.find(((Personne)(session.getAttribute("user"))).getEmail());
+        }
+            
+        request.setAttribute("user", currentUser);
+        
+        long id = Long.valueOf(idInput);
+        
+        reservation = reservationFacade.find(id);
+        
+        if (reservation == null){
             failed = true;
-            errors.add("Vous devez être connecté pour pouvoir retirer un "
-                    + "élément de votre panier");
+            errors.add("Cette réservation n'existe pas.");
         }
         
         if (failed){
@@ -82,9 +93,8 @@ public class RetirerPanier extends HttpServlet {
             return;
         }
         
-        Personne currentUser = (Personne) session.getAttribute("user");
         try {
-            Reservation r = currentUser.retirerDuPanier(new Reservation(evenement, numberOfTickets));
+            Reservation r = currentUser.retirerDuPanier(reservation);
         } catch (PasPresenteException e) {
             errors.add("Désolé, " + e.getEvenement().getNom() + " n'est pas présente dans votre panier");
             request.setAttribute("errors", errors);
@@ -93,8 +103,10 @@ public class RetirerPanier extends HttpServlet {
         }
         
         personneFacade.edit(currentUser);
+        evenementFacade.edit(reservation.getEvenement());
         
-        infos.add("L'évenement " + evenement.getNom() + " a bien été retiré de "
+        
+        infos.add("La réservation de l'évenement " + reservation.getEvenement().getNom() + " a bien été retiré de "
                 + "vote panier");
         
         request.setAttribute("infos", infos);
@@ -102,7 +114,6 @@ public class RetirerPanier extends HttpServlet {
         getServletContext().getRequestDispatcher("/Panier").forward(request, response);
     
     }
-       
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
