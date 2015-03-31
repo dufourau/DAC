@@ -49,6 +49,10 @@ public class Personne implements Serializable {
     public Personne() {
     }
     
+    public void doPayment(){
+        this.panier.doPayment();
+    }
+    
     /**
      * Get the value of nom
      *

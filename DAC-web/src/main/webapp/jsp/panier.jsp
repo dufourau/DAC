@@ -55,13 +55,20 @@
                                          <button type="submit" class="btn btn-default">Retirer</button>
                                     </form>
                               </c:forEach>
-                            <div class="row">  
-                                <label for="total">Total</label>
-                                <input class="form-control" id="total" name="id" value="${sessionScope.user.getPanier().getValeur()}" readonly="true">                           
-                                <a href="Payment" class="btn btn-default">Payer</a>                         
-                            </div>
+                            
                         </div>
                     </div>
+                    <c:choose>
+                        <c:when test="${sessionScope.user.getPanier().getNbReservation() eq 0}">                            
+                        </c:when>
+                        <c:otherwise>
+
+                            <label for="total">Total</label>
+                            <input class="form-control" id="total" name="id" value="${sessionScope.user.getPanier().getValeur()}" readonly="true">                           
+                            <a href="Payment" class="btn btn-default">Payer</a>                         
+
+                        </c:otherwise>
+                    </c:choose>  
                 </div>
                 
                     

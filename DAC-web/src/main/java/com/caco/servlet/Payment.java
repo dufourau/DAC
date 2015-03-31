@@ -9,6 +9,7 @@ import com.caco.Entity.Personne;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,10 @@ import org.apache.logging.log4j.Logger;
 public class Payment extends HttpServlet {
     
     private static final Logger LOGGER = LogManager.getLogger(Payment.class);
+    List<String> errors = new ArrayList<>();
+    List<String> infos = new ArrayList<>();
+    boolean success = true;
+    Personne currentUser;
     
     @EJB
     private PersonneFacadeLocal personneFacade;
@@ -63,7 +68,16 @@ public class Payment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        HttpSession session = request.getSession();
+        
+        
+        if (session.getAttribute("username") != null){
+            currentUser = personneFacade.find(session.getAttribute("username"));
+        }
+            
+        session.setAttribute("user", currentUser);
+        
+        doPayment(request, response);
     }
 
     /**
@@ -75,5 +89,98 @@ public class Payment extends HttpServlet {
     public String getServletInfo() {
         return "Index servlet";
     }// </editor-fold>
+    
+    private void doPayment(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException{
+        errors = new ArrayList<>();
+        infos = new ArrayList<>();
+        success = true;
+        if(request.getParameter("prenom") != null && request.getParameter("nom") != null && request.getParameter("codepostal") != null && request.getParameter("ville") !=null && request.getParameter("adresse")!=null){
+            
+            String prenom = request.getParameter("prenom");
+            if(prenom.isEmpty()){
+                errors.add("Veuillez renseigner un prenom.");
+                success = false;
+            }
+            String nom = request.getParameter("nom");
+            if(prenom.isEmpty()){
+                errors.add("Veuillez renseigner un nom.");
+                success = false;
+            }
+            String codepostal = request.getParameter("codepostal");
+            int cp;
+            try {
+                cp = Integer.parseInt(codepostal);
+            } catch (NumberFormatException e){
+                errors.add("Le codepostal ne représente pas un nombre valide.");
+                success = false;
+            }
+            String ville = request.getParameter("ville");
+            if(ville.isEmpty()){
+                errors.add("Veuillez renseigner une ville.");
+                success = false;
+            }
+            String adresse = request.getParameter("adresse");
+            if(adresse.isEmpty()){
+                errors.add("Veuillez renseigner un adresse.");
+                success = false;
+            }
+            String gender = request.getParameter("gender");
+            String proprietaire = request.getParameter("proprietaire");
+            String numerodecarte = request.getParameter("numerodecarte");
+            String date = request.getParameter("date");
+            String crypto = request.getParameter("crypto");
+            if(gender == null || gender.isEmpty() ){
+                errors.add("Veuillez renseigner un type de carte");
+                success = false;
+            }
+            if(proprietaire == null || proprietaire.isEmpty() ){
+                errors.add("Veuillez renseigner un nom de propriétaire");
+                success = false;
+            }
+            if(date == null || date.isEmpty() ){
+                errors.add("Veuillez renseigner une date");
+                success = false;
+            }
+            int num;
+            try {
+                num = Integer.parseInt(numerodecarte);
+            } catch (NumberFormatException e){
+                errors.add("Le numéro de carte ne représente pas un nombre valide.");
+                success = false;
+            }
+            int crypt;
+            try {
+                crypt = Integer.parseInt(crypto);
+            } catch (NumberFormatException e){
+                errors.add("Le cryptogramme ne représente pas un nombre valide.");
+                success = false;
+            }
+            
+            
+            
+        }else{
+            errors.add("Veuillez compléter tous les champs");
+            success = false;
+            
+        }
+        
+        if (success){
+            currentUser.doPayment();
+            personneFacade.edit(currentUser);
+            infos.add("Les évenements ont bien été payés.");
+            
+        }
+        
+        if (errors ==null || errors.isEmpty()) errors = null;
+        if (infos ==null || infos.isEmpty()) infos = null;
+        
+        if (success){
+            request.setAttribute("infos", infos);
+        } else {
+            request.setAttribute("errors", errors);
+        }
+        getServletContext().getRequestDispatcher("/jsp/panier.jsp").forward(request, response);
+    }
 
 }

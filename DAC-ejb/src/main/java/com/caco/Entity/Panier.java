@@ -35,10 +35,24 @@ public class Panier implements Serializable {
     public Panier() {
         this.reservations = new ArrayList<>();
     }
+    
+    public void doPayment(){
+        for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
+            Reservation r = iterator.next();
+           
+            iterator.remove();
+                
+            
+        }
+    }
 
     public Panier(Long id, List<Reservation> reservations, double valeur) {
         this.id = id;
         this.reservations = reservations;
+    }
+    
+    public int getNbReservation(){
+        return reservations.size();
     }
 
     public void addReservation(Reservation reservation) throws RuptureDeStockException{
