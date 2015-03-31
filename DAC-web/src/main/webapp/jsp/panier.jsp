@@ -1,3 +1,7 @@
+<%@page import="com.caco.Entity.stateless.PersonneFacadeLocal"%>
+<%@page import="com.caco.Entity.stateless.PersonneFacade"%>
+<%@page import="javax.ejb.EJB"%>
+<%@page import="com.caco.Entity.Personne"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

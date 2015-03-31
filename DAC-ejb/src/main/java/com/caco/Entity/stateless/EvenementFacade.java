@@ -101,5 +101,19 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
         
         return req.getResultList();
     }
+
+    @Override
+    public void remove(String nom) {
+        
+        String request = "DELETE FROM Evenement as events "
+                + "WHERE LOWER(events.nom) like LOWER(:nom)";
+                
+        //Création de la requête et set des paramètres
+        Query req = em.createQuery(request);
+        req = req.setParameter("nom", "%"+nom+"%");
+        req.executeUpdate();
+    }
+    
+    
     
 }

@@ -20,9 +20,9 @@ public enum Categorie {
     private Categorie(String s) {
         name = s;
     }
-
     
     public static Categorie fromString(String categorie){
+        if (categorie == null) return null;
         if(categorie.equalsIgnoreCase("SPORT")){
             return SPORT;
         }
