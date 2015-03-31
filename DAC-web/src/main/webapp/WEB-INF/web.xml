@@ -17,9 +17,10 @@
         <servlet-name>Inscription</servlet-name>
         <servlet-class>com.caco.servlet.Inscription</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>About</servlet-name>
-        <jsp-file>jsp/about.jsp</jsp-file>
+        <servlet-class>com.caco.servlet.About</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Panier</servlet-name>
@@ -43,6 +44,7 @@
         <servlet-name>Admin</servlet-name>
         <servlet-class>com.caco.servlet.Admin</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>

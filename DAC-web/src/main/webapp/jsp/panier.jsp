@@ -43,7 +43,16 @@
                                             <p>Date ${reservation.getEvenement().getDate()}</p>
                                             <p>Categorie: ${reservation.getEvenement().getCategorie()}</p>
                                         </div>
-                                    </div>                    
+                                    </div>
+                                    <form action="DetailsEvent" method="get">
+                                        <input type="hidden" name="id" value="${reservation.getEvenement().getId()}">
+                                        <button type="submit" class="btn btn-default">Selectionner</button>
+                                     </form>
+                                     <!--Add a remove event servlet-->
+                                     <form action="RetirerPanier" method="get">
+                                         <input type="hidden" name="id" value="${reservation.getId()}">
+                                        <button type="submit" class="btn btn-default">Retirer</button>
+                                    </form>
                               </c:forEach>
                         </div>
                     </div>

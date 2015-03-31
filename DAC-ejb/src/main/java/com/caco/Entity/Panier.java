@@ -48,20 +48,21 @@ public class Panier implements Serializable {
                 return;
             }
         }
+        reservation.setPanier(this);
         reservation.reserverTicket();
         this.reservations.add(reservation);
     }
     
     public void removeReservation(Reservation reservation) throws PasPresenteException{
-        for (Reservation r : this.reservations){
-            if (r.getEvenement().getId().equals(reservation.getEvenement().getId())){
-                r.retirerTicket();
-                this.reservations.remove(r);
+        for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
+            Reservation r = iterator.next();
+            if (r.getId().equals(reservation.getId())){
+                r.annuler();
+                iterator.remove();
                 return;
             }
         }
         throw new PasPresenteException(reservation.getEvenement());
-           
     }
     
     public List<Reservation> getReservations() {

@@ -99,24 +99,27 @@ public class AjouterPanier extends HttpServlet {
             return;
         }
         
-        Personne currentUser = (Personne) session.getAttribute("user");
+        Personne user = null;
+                
+        if (session.getAttribute("username") != null){
+            user = personneFacade.find(session.getAttribute("username"));
+        }
+            
+        session.setAttribute("user",user);
+        
         try {
-            Reservation r = currentUser.ajouterAuPanier(new Reservation(evenement, numberOfTickets));
+            user.ajouterAuPanier(new Reservation(evenement, numberOfTickets));
+            personneFacade.edit(user);
+            infos.add("L'évenement " + evenement.getNom() + " a bien été ajouté à "
+                    + "vote panier");
+            request.setAttribute("infos", infos);
+            getServletContext().getRequestDispatcher("/Panier").forward(request, response);
         } catch (RuptureDeStockException e) {
             errors.add("Désolé, il ne reste plus " + e.getQuantiteDemandee() + " places disponibles");
             request.setAttribute("errors", errors);
             getServletContext().getRequestDispatcher("/Index").forward(request, response);
-            return;
         }
-        
-        personneFacade.edit(currentUser);
-        
-        infos.add("L'évenement " + evenement.getNom() + " a bien été ajouté à "
-                + "vote panier");
-        
-        request.setAttribute("infos", infos);
-        
-        getServletContext().getRequestDispatcher("/Panier").forward(request, response);
+
         
     }
 

@@ -113,6 +113,17 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
         req = req.setParameter("nom", "%"+nom+"%");
         req.executeUpdate();
     }
+
+    @Override
+    public List<Evenement> findEvents(String nom) {
+        String request = "SELECT events FROM Evenement as events "
+                + "WHERE LOWER(events.nom) like LOWER(:nom)";
+                
+        //Création de la requête et set des paramètres
+        Query req = em.createQuery(request);
+        req = req.setParameter("nom", "%"+nom+"%");
+        return req.getResultList();
+    }
     
     
     

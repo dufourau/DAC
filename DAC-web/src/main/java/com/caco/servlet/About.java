@@ -5,14 +5,11 @@
  */
 package com.caco.servlet;
 
-import com.caco.Entity.Evenement;
 import com.caco.Entity.Personne;
-import com.caco.Entity.stateless.EvenementFacadeLocal;
 import com.caco.Entity.stateless.PersonneFacadeLocal;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,19 +19,15 @@ import org.apache.logging.log4j.Logger;
 
 /**
  *
- * @author andreiy
+ * @author pouzaudr
  */
-@WebServlet(name = "DetailsEvent", urlPatterns = {"/DetailsEvent"})
-public class DetailsEvent extends HttpServlet {
-
-    private static final Logger LOGGER = LogManager.getLogger(DetailsEvent.class);
-
-    @EJB    
-    private EvenementFacadeLocal evenementFacade;
+public class About extends HttpServlet {
+    
+    private static final Logger LOGGER = LogManager.getLogger(About.class);
     
     @EJB
     private PersonneFacadeLocal personneFacade;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,20 +39,6 @@ public class DetailsEvent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             
-        String idInput = request.getParameter("id");
-        
-        Evenement evenement = null;
-        
-        long id;
-        try {
-            id = Long.valueOf(idInput);
-            evenement = evenementFacade.find(id);
-        } catch (NumberFormatException e) {
-            LOGGER.info("Bad input for DetailsEvent, id : \" " + idInput
-                    + "\" is not in a valid number format");
-        }
-        
         Personne user = null;
         
         HttpSession session = request.getSession();
@@ -68,10 +47,8 @@ public class DetailsEvent extends HttpServlet {
             user = personneFacade.find(session.getAttribute("username"));
         }
             
-        session.setAttribute("user",user);
-        
-        request.setAttribute("evenement", evenement);
-        getServletContext().getRequestDispatcher("/jsp/detailEvent.jsp").forward(request, response);       
+        session.setAttribute("user", user);
+        request.getRequestDispatcher("/jsp/about.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -110,7 +87,7 @@ public class DetailsEvent extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Index servlet";
     }// </editor-fold>
 
 }

@@ -5,8 +5,7 @@
  */
 package com.caco.Entity.stateless;
 
-import com.caco.Entity.Panier;
-import javax.ejb.EJB;
+import com.caco.Entity.Reservation;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,13 +14,12 @@ import org.apache.logging.log4j.Logger;
 
 /**
  *
- * @author pouzaudr
+ * @author andreiy
  */
 @Stateless
-@EJB(name="ejb/PanierFacade",beanInterface=PanierFacadeLocal.class,beanName="PanierFacade")
-public class PanierFacade extends AbstractFacade<Panier> implements PanierFacadeLocal  {
+public class ReservationFacade extends AbstractFacade<Reservation> implements ReservationFacadeLocal {
     
-    private static final Logger LOGGER = LogManager.getLogger(PanierFacade.class);
+    private static final Logger LOGGER = LogManager.getLogger(EvenementFacade.class);
     
     @PersistenceContext(unitName = "com.caco_DAC-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -31,8 +29,7 @@ public class PanierFacade extends AbstractFacade<Panier> implements PanierFacade
         return em;
     }
 
-    public PanierFacade() {
-        super(Panier.class);
+    public ReservationFacade() {
+        super(Reservation.class);
     }
-    
 }
