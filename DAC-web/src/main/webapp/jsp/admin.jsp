@@ -23,7 +23,7 @@
             <div class="col-md-8">
                 <c:choose>
                     <c:when test="${sessionScope.user eq null}">
-                        <h3>Connectez vous pour accéder à votre panier</h3>
+                        <h3>Connectez vous pour accéder à la page administrateur</h3>
                     </c:when>
                     <c:otherwise>
                         <c:choose>

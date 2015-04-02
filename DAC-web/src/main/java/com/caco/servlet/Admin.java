@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import javax.ejb.EJB;
@@ -87,6 +88,25 @@ public class Admin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Personne user = null;
+        
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("username") != null){
+            user = personneFacade.find(session.getAttribute("username"));
+        }
+            
+        session.setAttribute("user",user);
+        
+        if (!user.isAdmin()){
+            List<String> errors = new ArrayList<>();
+            errors.add("Vous devez être connecté en tant qu'administrateur pour accéder à cette page.");
+            request.setAttribute("errors", errors);
+            doGet(request, response);
+            return;
+        }
+        
         if (request.getParameter("operation") != null && request.getParameter("operation").equals("add")){
             addEvent(request, response);
         } else if (request.getParameter("operation") != null &&  request.getParameter("operation").equals("remove")){
@@ -212,8 +232,18 @@ public class Admin extends HttpServlet {
         }
 
         if (success){
-            List<Evenement>  events = evenementFacade.findEvents(titre);
+            List<Evenement>  events = evenementFacade.findEvents(titre.trim());
+            if (events.isEmpty()){
+                errors.add("Aucun évènement correspondant à " + titre + " trouvé.");
+            }
             for (Evenement e : events){
+                for (Reservation r : e.getReservations()) {
+                    try {
+                        r.getPanier().removeReservation(r);
+                        panierFacade.edit(r.getPanier());
+                    } catch (PasPresenteException ex) {
+                    }
+                }
                 for (Reservation r : e.getReservations()){
                     try {
                         r.getPanier().removeReservation(r);
@@ -221,20 +251,18 @@ public class Admin extends HttpServlet {
                     } catch (PasPresenteException ex) {
                     }
                 }
+                infos.add("L'évenement " + e.getNom() + " a été supprimé.");
+                LOGGER.info("Deleted event " + titre);
             }
             evenementFacade.remove(titre);
-            infos.add("L'évenement " + titre + " a été supprimé.");
-            LOGGER.info("Create new event " + titre);
+            
         }
         
         if (errors.isEmpty()) errors = null;
         if (infos.isEmpty()) infos = null;
         
-        if (success){
-            request.setAttribute("infos", infos);
-        } else {
-            request.setAttribute("errors", errors);
-        }
+        request.setAttribute("infos", infos);
+        request.setAttribute("errors", errors);
         doGet(request, response);
     }
     /**
