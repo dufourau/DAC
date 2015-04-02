@@ -99,6 +99,11 @@ public class Admin extends HttpServlet {
             
         session.setAttribute("user",user);
         
+        if (user == null){
+            doGet(request, response);
+            return;
+        }
+        
         if (!user.isAdmin()){
             List<String> errors = new ArrayList<>();
             errors.add("Vous devez être connecté en tant qu'administrateur pour accéder à cette page.");
@@ -232,13 +237,15 @@ public class Admin extends HttpServlet {
         }
 
         if (success){
-            List<Evenement>  events = evenementFacade.findEvents(titre.trim());
+            List<Evenement>  events = evenementFacade.findEvents(titre.replaceAll("\\s", " ").trim());
             if (events.isEmpty()){
                 errors.add("Aucun évènement correspondant à " + titre + " trouvé.");
             }
             for (Evenement e : events){
-                for (Reservation r : e.getReservations()) {
+                for (Iterator<Reservation> iterator = e.getReservations().iterator(); iterator.hasNext();) {
+                    Reservation r = iterator.next();
                     try {
+                        iterator.remove();
                         r.getPanier().removeReservation(r);
                         panierFacade.edit(r.getPanier());
                     } catch (PasPresenteException ex) {
@@ -251,10 +258,10 @@ public class Admin extends HttpServlet {
                     } catch (PasPresenteException ex) {
                     }
                 }
+                evenementFacade.remove(e);
                 infos.add("L'évenement " + e.getNom() + " a été supprimé.");
                 LOGGER.info("Deleted event " + titre);
             }
-            evenementFacade.remove(titre);
             
         }
         
