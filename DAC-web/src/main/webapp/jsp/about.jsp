@@ -17,7 +17,7 @@
         <div class="col-md-4">
             <%@ include file="/jspf/user.jspf" %>
         </div>
-        <div class="container">
+        <div class="col-md-offset-1 col-md-7">
             <div class="row">
                 <h1>A bunch of geek :</h1>
                 ANDREI Yannick </br>

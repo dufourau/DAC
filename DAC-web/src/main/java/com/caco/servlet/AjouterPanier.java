@@ -111,7 +111,7 @@ public class AjouterPanier extends HttpServlet {
             user.ajouterAuPanier(new Reservation(evenement, numberOfTickets));
             personneFacade.edit(user);
             infos.add("L'évenement " + evenement.getNom() + " a bien été ajouté à "
-                    + "vote panier");
+                    + "vote panier.<br>Attention, cette réservation expirera dans 15 minutes.");
             request.setAttribute("infos", infos);
             getServletContext().getRequestDispatcher("/Panier").forward(request, response);
         } catch (RuptureDeStockException e) {

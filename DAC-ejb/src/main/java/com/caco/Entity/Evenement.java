@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -42,6 +43,8 @@ public class Evenement implements Serializable {
     private String lieu;
     private double prix;
     private int quantiteDisponible;
+    @Column(columnDefinition="TEXT")
+    private String description;
     @OneToMany(mappedBy = "evenement", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Reservation> reservations;
     
@@ -51,7 +54,7 @@ public class Evenement implements Serializable {
     public Evenement() {
     }
 
-    public Evenement(String nom, Date date, String lieu, double prix, Categorie categorie, int quantiteInitiale) {
+    public Evenement(String nom, Date date, String lieu, double prix, Categorie categorie, int quantiteInitiale, String description) {
         this.nom = nom;
         this.date = date;
         this.lieu = lieu;
@@ -59,6 +62,7 @@ public class Evenement implements Serializable {
         this.categorie = categorie;
         this.quantiteDisponible = quantiteInitiale;
         this.reservations = new ArrayList<>();
+        this.description = description;
     }
     
     public Long getId() {
@@ -142,6 +146,14 @@ public class Evenement implements Serializable {
         return reservations;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }

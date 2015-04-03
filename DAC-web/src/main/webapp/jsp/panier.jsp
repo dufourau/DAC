@@ -22,57 +22,74 @@
         <%@ include file="/jspf/user.jspf" %>
     </div>
     
-    <div class="container">
+    <div class="col-md-8">
 
         <c:choose> 
             <c:when test="${sessionScope.user eq null}">
                 <h3> Connectez vous pour accéder à votre panier </h3>
             </c:when>
             <c:otherwise>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="table-responsive">
-                                <c:forEach var="reservation" items="${sessionScope.user.getPanier().getReservations()}">
-                                    <div class="panel event">
-                                        <div class="panel-heading">
-                                            ${reservation.getEvenement().nom}
+                <c:choose>
+                    <c:when test="${sessionScope.user.getPanier().getNbReservation() eq 0}">
+                        <div class="alert alert-danger">
+                            <h3>
+                                Votre panier est vide
+                            </h3>
+                        </div>
+                    </c:when>
+                     <c:otherwise>
+                        <div class="alert alert-danger clearfix">
+                            <span class="glyphicon glyphicon-dollar">Total:</span> 
+                            <font size="5"> ${sessionScope.user.getPanier().getValeur()}</font> &euro;
+                            <a href="Payment" class="btn btn-default pull-right">Payer</a>
+                        </div>
+                        <c:forEach var="reservation" items="${sessionScope.user.getPanier().getReservations()}">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    ${reservation.getEvenement().nom}
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-md-12 container">
+                                        <div class="margin col-md-12">
+                                            <span class="glyphicon glyphicon-chevron-right"> Nombre de places réservées : <big>${reservation.getNumberOfTickets()}</big></span>
                                         </div>
-                                        <div class="panel-body">
-                                            <p>Nombre de places réservées : ${reservation.getNumberOfTickets()}</p>
-                                            <p>Lieu: ${reservation.getEvenement().getLieu()}</p>
-                                            <p>Date ${reservation.getEvenement().getDate()}</p>
-                                            <p>Categorie: ${reservation.getEvenement().getCategorie()}</p>
-                                            <p>Prix: ${reservation.getEvenement().getPrix()}</p>
+                                         <div class="margin col-md-5">
+                                            <span class="glyphicon glyphicon-map-marker"> Lieu : ${reservation.getEvenement().getLieu()}<a target="_blank" href="http://maps.google.fr/?q=${evenement.lieu}" class="pull-right"><span class="glyphicon glyphicon-map-marker"></span></a></span> 
+                                        </div>
+                                        <div class="margin col-md-5">
+                                            <span class="glyphicon glyphicon-calendar"> Date : <fmt:formatDate value="${reservation.getEvenement().getDate()}" pattern="dd/mm/yyyy" /></span> 
+                                        </div>
+                                        <div class="margin col-md-5">
+                                            <span class="glyphicon glyphicon-euro"> Prix : ${reservation.getEvenement().getPrix()} &euro;</span> 
+                                        </div>
+                                        <div class="margin col-md-5">
+                                            <span class="glyphicon glyphicon-tag"> Catégorie : ${reservation.getEvenement().getCategorie()}</span> 
+                                        </div>
+                                        <div class="margin col-md-5">
+                                            <span class="glyphicon glyphicon-time"> Expire à : <fmt:formatDate value="${reservation.getExpirationDate()}" pattern="HH:mm:ss" /></span> 
                                         </div>
                                     </div>
+                                </div>
+                                <div class="panel-footer clearfix">
                                     <form action="DetailsEvent" method="get">
                                         <input type="hidden" name="id" value="${reservation.getEvenement().getId()}">
-                                        <button type="submit" class="btn btn-default">Selectionner</button>
+                                        <button type="submit" class="pull-left btn btn-default btn-sm">Selectionner</button>
                                      </form>
                                      <!--Add a remove event servlet-->
                                      <form action="RetirerPanier" method="get">
                                          <input type="hidden" name="id" value="${reservation.getId()}">
-                                         <button type="submit" class="btn btn-default">Retirer</button>
+                                         <button type="submit" class="pull-right btn btn-danger btn-sm">Retirer</button>
                                     </form>
-                              </c:forEach>
-                            
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <div class="alert alert-danger clearfix">
+                            <span class="glyphicon glyphicon-dollar">Total:</span> 
+                            <font size="5"> ${sessionScope.user.getPanier().getValeur()}</font> &euro;
+                            <a href="Payment" class="btn btn-default pull-right">Payer</a>
                         </div>
-                    </div>
-                    <c:choose>
-                        <c:when test="${sessionScope.user.getPanier().getNbReservation() eq 0}">                            
-                        </c:when>
-                        <c:otherwise>
-
-                            <label for="total">Total</label>
-                            <input class="form-control" id="total" name="id" value="${sessionScope.user.getPanier().getValeur()}" readonly="true">                           
-                            <a href="Payment" class="btn btn-default">Payer</a>                         
-
-                        </c:otherwise>
-                    </c:choose>  
-                </div>
-                
-                    
-                
+                    </c:otherwise>
+                </c:choose>
             </c:otherwise>
         </c:choose>     
     </div>

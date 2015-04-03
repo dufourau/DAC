@@ -205,7 +205,7 @@ public class Admin extends HttpServlet {
         }
 
         if (success){
-            evenementFacade.createFromParam(titre, date, lieu, prix, categorie, nombreTickets);
+            evenementFacade.createFromParam(titre, date, lieu, prix, categorie, nombreTickets, description);
             infos.add("L'évenement " + titre + " a bien été créé.");
             LOGGER.info("Create new event " + titre);
         }

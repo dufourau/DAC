@@ -33,7 +33,7 @@ public class Reservation implements Serializable {
     private Long id;
     
     // Expiration time in seconds : 15 minutes
-    private static int timeOut = 1*60000;
+    private static int timeOut = 15*60000;
     
     @ManyToOne(cascade = CascadeType.MERGE, optional = false)
     private Evenement evenement;
@@ -102,7 +102,7 @@ public class Reservation implements Serializable {
 
     @Override
     public String toString() {
-        return "Reservation{" + "id=" + id + ", evenement=" + evenement + ", numberOfTickets=" + numberOfTickets + ", expirationDate=" + expirationDate + '}';
+        return "Reservation{" + "id=" + id + ", evenement=" + evenement.getNom() + ", numberOfTickets=" + numberOfTickets + ", expirationDate=" + expirationDate + '}';
     }    
     
 }

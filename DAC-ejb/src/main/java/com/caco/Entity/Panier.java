@@ -56,12 +56,6 @@ public class Panier implements Serializable {
     }
 
     public void addReservation(Reservation reservation) throws RuptureDeStockException{
-        for (Reservation r : this.reservations){
-            if (r.getEvenement().getId().equals(reservation.getEvenement().getId())){
-                r.ajouterTicket(reservation.getNumberOfTickets());
-                return;
-            }
-        }
         reservation.setPanier(this);
         reservation.reserverTicket();
         this.reservations.add(reservation);

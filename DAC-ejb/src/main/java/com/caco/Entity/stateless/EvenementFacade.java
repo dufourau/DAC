@@ -52,7 +52,8 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
                     (String) evenement.get("ville"),
                     (double) evenement.get("prix"),
                     Categorie.fromString((String) evenement.get("categorie")),
-                    (int) evenement.get("quantite")
+                    (int) evenement.get("quantite"),
+                    (String) evenement.get("description")
             );
         } catch (java.lang.ClassCastException e){
             LOGGER.error("Error while loading Evenement : "
@@ -63,8 +64,8 @@ public class EvenementFacade extends AbstractFacade<Evenement> implements Evenem
     }
 
     @Override
-    public void createFromParam(String nom, Date date, String lieu, double prix, Categorie categorie, int quantiteInitiale) {
-        Evenement e = new Evenement(nom, date, lieu, prix, categorie, quantiteInitiale);
+    public void createFromParam(String nom, Date date, String lieu, double prix, Categorie categorie, int quantiteInitiale, String description) {
+        Evenement e = new Evenement(nom, date, lieu, prix, categorie, quantiteInitiale, description);
         create(e);
     }
 

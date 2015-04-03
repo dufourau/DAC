@@ -52,7 +52,15 @@ public class Payment extends HttpServlet {
         if (session.getAttribute("username") != null){
             user = personneFacade.find(session.getAttribute("username"));
         }
-            
+        
+        if (user != null && user.getPanier().getNbReservation() == 0){
+           errors = new ArrayList<>();
+           errors.add("Ajoutez d'abord des articles à votre panier !");
+           request.setAttribute("errors", errors);
+           request.getRequestDispatcher("/Index").forward(request, response);
+           return;
+        }
+
         session.setAttribute("user", user);
         request.getRequestDispatcher("/jsp/payment.jsp").forward(request, response);
     }
@@ -70,12 +78,20 @@ public class Payment extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         
-        
         if (session.getAttribute("username") != null){
             currentUser = personneFacade.find(session.getAttribute("username"));
         }
-            
+        
         session.setAttribute("user", currentUser);
+        
+        if (currentUser != null){
+            currentUser.getPanier().update();
+            personneFacade.edit(currentUser);
+        } else {
+            request.getRequestDispatcher("/jsp/payment.jsp").forward(request, response);
+            return;
+        }
+            
         
         doPayment(request, response);
     }
@@ -180,7 +196,7 @@ public class Payment extends HttpServlet {
         } else {
             request.setAttribute("errors", errors);
         }
-        getServletContext().getRequestDispatcher("/jsp/panier.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/jsp/payment.jsp").forward(request, response);
     }
 
 }

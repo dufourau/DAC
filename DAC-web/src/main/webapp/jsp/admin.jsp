@@ -87,7 +87,7 @@
                                                 <span style="color:red"> * champs obligatoires</span>
                                             </div>
                                             <div class="pull-right">
-                                              <button type="submit" class="btn btn-default">Ajouter l'évenement</button>
+                                              <button type="submit" class="btn btn-info">Ajouter l'évenement</button>
                                             </div>
                                         </div>
                                   </form>
@@ -106,7 +106,7 @@
                                                 <span style="color:red"> * champs obligatoires</span>
                                             </div>
                                             <div class="pull-right">
-                                              <button type="submit" class="btn btn-default">Supprimer les évenement</button>
+                                              <button type="submit" class="btn btn-danger">Supprimer les évenement</button>
                                             </div>
                                         </div>
                                   </form>
