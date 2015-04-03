@@ -31,7 +31,7 @@
          
                     <div class="well">
                         <label for="total">Total</label>
-                        <input class="form-control" id="total" name="id" value="${sessionScope.user.getPanier().getValeur()}" readonly="true">                           
+                        <input class="form-control" id="total" name="id" value="${sessionScope.user.getPanier().getValeur()} &euro;" readonly="true">                           
                         
                         <form class="form-horizontal" action="Payment" method="POST">
                             <h3>Références de facturation</h3>
@@ -100,8 +100,8 @@
                             </div>
                             
                             <div class="form-group">                                
-                                <div class="col-sm-offset-10 col-sm-2"> 
-                                  <button type="submit" class="btn btn-sucess pull-right">Payer</button>
+                                <div class="col-sm-12"> 
+                                  <button type="submit" class="btn btn-success pull-right">Payer</button>
                                   <a href="Panier" class="btn btn-danger pull-left">Annuler</a>
                                 </div>
                             </div>

@@ -15,11 +15,11 @@ description: |
     voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
     qui officia deserunt mollit anim id est laborum.
 ---
-nom: "Strip-tease de Yannick"
+nom: "Anniversaire de Yannick"
 date: 10/04/2015
-ville: Grenoble
+ville: Ajaccio
 prix: 0.
-categorie: SPORT
+categorie: SPECTACLE
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -32,7 +32,7 @@ nom: "Grande fête du tuning"
 date: 15/06/2016
 ville: Clermont-Ferrand
 prix: 15.5
-categorie: SPORT
+categorie: DIVERS
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -45,7 +45,7 @@ nom: "Soirée de la crèpe"
 date: 30/05/2015
 ville: Brest
 prix: 5.
-categorie: SPORT
+categorie: DIVERS
 quantite: 5
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -71,7 +71,7 @@ nom: "Banquet annuel de la charcuterie"
 date: 23/09/2015
 ville: Toulouse
 prix: 20.
-categorie: SPORT
+categorie: DIVERS
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -84,7 +84,7 @@ nom: "Journée de la famille"
 date: 06/05/1992
 ville: Dunkerque
 prix: 7.5
-categorie: SPORT
+categorie: DIVERS
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -97,7 +97,7 @@ nom: "Concert de Magic System"
 date: 10/12/2016
 ville: Bamako
 prix: 10.
-categorie: SPORT
+categorie: CONCERT
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -110,7 +110,7 @@ nom: "Bal de l'école polytechnique"
 date: 25/05/2015
 ville: Versaille
 prix: 525.
-categorie: SPORT
+categorie: SPECTACLE
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -136,7 +136,7 @@ nom: "Congrés du parti communiste"
 date: 25/05/2015
 ville: Neuilly sur Seine
 prix: 2500.50
-categorie: SPORT
+categorie: SPECTACLE
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -149,7 +149,7 @@ nom: "Soutenance de DAC"
 date: 03/04/2015
 ville: Saint-Martin-d'Heres
 prix: 1.
-categorie: SPORT
+categorie: SPECTACLE
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -175,7 +175,7 @@ nom: "Week end romantique surprise"
 date: 01/01/2015
 ville: Guantanamo
 prix: 100.
-categorie: SPORT
+categorie: DIVERS
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -188,7 +188,7 @@ nom: "Concert des kakos"
 date: 28/08/2015
 ville: Grenoble
 prix: 15.
-categorie: SPORT
+categorie: CONCERT
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -201,7 +201,7 @@ nom: "Feu d'artifice géant"
 date: 30/08/2015
 ville: Bagdad
 prix: 13.
-categorie: SPORT
+categorie: SPECTACLE
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -214,7 +214,7 @@ nom: "Congrès de la faluche"
 date: 30/06/2015
 ville: Marseille
 prix: 1500.
-categorie: SPORT
+categorie: DIVERS
 quantite: 100
 description: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
